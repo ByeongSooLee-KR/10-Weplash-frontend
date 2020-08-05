@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import { downloadBtnSvg } from "../../config";
+import UserCard from "../UserCard/UserCard";
 import styled from "styled-components";
 import theme from "../../Styles/StyleTheme";
 
@@ -9,12 +10,32 @@ const {
 } = theme;
 
 const CardUser = (props) => {
+  const [show, setShow] = useState(false);
+  const showUserCard = () => {
+    setShow(true);
+  };
+  const hideUserCard = () => {
+    setShow(false);
+  };
+
   return (
     <CardUserFrame>
-      <section>
-        <img alt="" src={props.data.cardUserImg} />
-        <p>{props.data.cardUserId}</p>
-      </section>
+      <div
+        className="mouseOver"
+        onMouseEnter={showUserCard}
+        onMouseLeave={hideUserCard}
+      >
+        {show && (
+          <UserCard
+            cardUserId={props.data.cardUserId}
+            cardUserImg={props.data.cardUserImg}
+          />
+        )}
+        <div className="userTag">
+          <img className="userImg" alt="" src={props.data.cardUserImg} />
+          <p>{props.data.cardUserId}</p>
+        </div>
+      </div>
       <Buttons>{downloadBtnSvg}</Buttons>
     </CardUserFrame>
   );
@@ -23,26 +44,29 @@ export default withRouter(CardUser);
 
 const CardUserFrame = styled.div`
   display: flex;
-  align-items: center;
+  width: 100%;
+  align-items: flex-end;
   padding: 20px;
-  bottom: 20px;
 
-  section {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    bottom: inherit;
-    cursor: pointer;
+  .mouseOver {
+    z-index: 50;
 
-    img {
-      width: 32px;
-      margin-right: 8px;
-      border-radius: 100%;
-    }
+    .userTag {
+      display: flex;
+      margin-top: 20px;
+      align-items: center;
+      cursor: pointer;
 
-    p {
-      font-family: sans-serif;
-      color: white;
+      .userImg {
+        width: 32px;
+        margin-right: 8px;
+        border-radius: 100%;
+      }
+
+      p {
+        font-family: sans-serif;
+        color: white;
+      }
     }
   }
 `;
@@ -60,10 +84,12 @@ const Buttons = styled.button`
   background-color: "white";
   outline: none;
   cursor: pointer;
+
   svg {
     width: 16px;
     fill: ${({ active }) => (active ? "white" : grayColor)};
   }
+
   &:hover {
     opacity: 1;
   }

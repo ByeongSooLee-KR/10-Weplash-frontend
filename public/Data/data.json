@@ -1,0 +1,11 @@
+{
+  "data": {
+    "topicTitle": "Travel",
+    "topicDesc": "Discover hidden wonders and inspiring destinations around the world from the comfort of your own home.",
+    "status": "Open",
+    "contributions": "3.7K",
+    "topcontributors": ["a", "b", "c"],
+    "curatedImgUrl": "https://images.unsplash.com/profile-1544707963613-16baf868f301?dpr=1&auto=format&fit=crop&w=40&h=40&q=60&crop=faces&bg=fff",
+    "curatedBy": "Unsplash"
+  }
+}

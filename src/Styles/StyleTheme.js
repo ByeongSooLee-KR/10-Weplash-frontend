@@ -3,6 +3,7 @@ const StyleTheme = {
     blackColor: "rgb(17, 17, 17)",
     grayColor: "rgb(118, 118, 118)",
     whiteColor: "rgb(255, 255, 255)",
+    redColor: "#f15151",
   },
 
   flexCenter: {

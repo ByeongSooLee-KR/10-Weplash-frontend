@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
-import { likeBtnSvg, collectBtnSvg } from "../../config";
 import styled from "styled-components";
+import { likeBtnSvg, collectBtnSvg } from "../../icons";
 import theme from "../../Styles/StyleTheme";
 
 const {
@@ -53,7 +52,7 @@ const CardTopBtns = () => {
   );
 };
 
-export default withRouter(CardTopBtns);
+export default CardTopBtns;
 
 const CardTopBtnsFrame = styled.div`
   z-index: 3;

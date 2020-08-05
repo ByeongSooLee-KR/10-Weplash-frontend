@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { statusSvg, contributionsSvg, topConributorsSvg } from "../config";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { statusSvg, contributionsSvg, topConributorsSvg } from "../icons";
 
 const TopicInfo = () => {
   const [data, getData] = useState([]);
@@ -11,14 +11,14 @@ const TopicInfo = () => {
       .then((res) => {
         getData(res.data);
       });
-  });
+  }, []);
 
   return (
     <TopicInfoFrame>
       <section>
         <h1>{data.topicTitle}</h1>
         <h2>{data.topicDesc}</h2>
-        <img alt="" src={data.curatedImgUrl}></img>
+        <img alt="ProfileImg" src={data.curatedImgUrl}></img>
         <p>
           Curated by <Link to="">{data.curatedBy}</Link>
         </p>
@@ -50,7 +50,7 @@ const TopicInfo = () => {
   );
 };
 
-export default withRouter(TopicInfo);
+export default TopicInfo;
 
 const TopicInfoFrame = styled.div`
   display: flex;
@@ -88,7 +88,6 @@ const TopicInfoFrame = styled.div`
         text-decoration: underline;
         font-family: sans-serif;
         color: ${(props) => props.theme.colors.grayColor};
-
         &:hover {
           color: black;
         }

@@ -1,46 +1,45 @@
 import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
-import { downloadBtnSvg } from "../../config";
-import UserCard from "../UserCard/UserCard";
 import styled from "styled-components";
+import { downloadBtnSvg } from "../../icons";
+import UserCard from "../UserCard/UserCard";
 import theme from "../../Styles/StyleTheme";
 
-const {
-  colors: { grayColor },
-} = theme;
-
-const CardUser = (props) => {
+const CardUser = ({ data }) => {
   const [show, setShow] = useState(false);
-  const showUserCard = () => {
-    setShow(true);
-  };
-  const hideUserCard = () => {
-    setShow(false);
-  };
 
   return (
     <CardUserFrame>
       <div
         className="mouseOver"
-        onMouseEnter={showUserCard}
-        onMouseLeave={hideUserCard}
+        onMouseEnter={() => setShow(true)}
+        onMouseLeave={() => setShow(false)}
       >
         {show && (
           <UserCard
-            cardUserId={props.data.cardUserId}
-            cardUserImg={props.data.cardUserImg}
+            cardUserId={data.user_name}
+            cardUserName={data.user_first_name + data.user_last_name}
+            cardUserImg={data.user_profile_image}
+            show={show}
           />
         )}
         <div className="userTag">
-          <img className="userImg" alt="" src={props.data.cardUserImg} />
-          <p>{props.data.cardUserId}</p>
+          <img
+            className="userImg"
+            alt="userProfileImg"
+            src={data.user_profile_image}
+          />
+          <p>{data.user_name}</p>
         </div>
       </div>
       <Buttons>{downloadBtnSvg}</Buttons>
     </CardUserFrame>
   );
 };
-export default withRouter(CardUser);
+export default CardUser;
+
+const {
+  colors: { grayColor },
+} = theme;
 
 const CardUserFrame = styled.div`
   display: flex;
@@ -50,6 +49,7 @@ const CardUserFrame = styled.div`
 
   .mouseOver {
     z-index: 50;
+    width: 90%;
 
     .userTag {
       display: flex;

@@ -81,11 +81,17 @@ const TopicInfoFrame = styled.div`
     p {
       margin-top: 8px;
       font-size: 15px;
+      font-family: sans-serif;
       color: ${(props) => props.theme.colors.blackColor};
 
       a {
         text-decoration: underline;
+        font-family: sans-serif;
         color: ${(props) => props.theme.colors.grayColor};
+
+        &:hover {
+          color: black;
+        }
       }
     }
   }

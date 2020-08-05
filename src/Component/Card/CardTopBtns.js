@@ -52,9 +52,11 @@ const CardTopBtns = () => {
     </CardTopBtnsFrame>
   );
 };
+
 export default withRouter(CardTopBtns);
 
 const CardTopBtnsFrame = styled.div`
+  z-index: 3;
   position: absolute;
   display: flex;
   top: 20px;

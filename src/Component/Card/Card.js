@@ -1,23 +1,22 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 import CardTopBtns from "./CardTopBtns";
 import CardUser from "./CardUser";
 
 const Card = ({ card }) => {
-  const height = (card.imageHeight * 416) / card.imageWidth;
+  const height = (card.height * 416) / card.width;
   return (
     <CardFrame height={Math.round(height, 0)}>
       <div className="hover">
         <CardTopBtns data={card} />
         <CardUser data={card} />
       </div>
-      <img alt="" src={card.cardImgUrl} />
+      <img alt="imageCard" src={card.image} />
     </CardFrame>
   );
 };
 
-export default withRouter(Card);
+export default Card;
 
 const CardFrame = styled.figure`
   position: relative;

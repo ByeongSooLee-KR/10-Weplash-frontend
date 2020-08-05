@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { withRouter } from "react-router-dom";
-import { followBtnSvg } from "../../config";
 import styled from "styled-components";
+import { followBtnSvg } from "../../icons";
 
-const UserCard = (props) => {
+const UserCard = ({ show, cardUserImg, cardUserName, cardUserId }) => {
   const [user, setUserCard] = useState([]);
+
   useEffect(() => {
     fetch("/Data/user.json")
       .then((res) => res.json())
@@ -15,12 +15,12 @@ const UserCard = (props) => {
 
   const uploadedImg = user.uploadedImg;
   return (
-    <UserCardFrame>
+    <UserCardFrame show={show}>
       <UserAccount>
-        <img className="userProfile" alt="" src={props.cardUserImg} />
+        <img className="userProfile" alt="userProfileImg" src={cardUserImg} />
         <div>
-          <p className="userName">{props.cardUserId}</p>
-          <p className="userId">@{user.userId}</p>
+          <p className="userName">{cardUserName}</p>
+          <p className="userId">@{cardUserId}</p>
         </div>
       </UserAccount>
       <UserUploadImg>
@@ -38,27 +38,17 @@ const UserCard = (props) => {
   );
 };
 
-export default withRouter(UserCard);
+export default UserCard;
 
 const UserCardFrame = styled.div`
-  z-index: 50;
-  width: 90%;
+  width: 100%;
   height: 251px;
   padding: 16px;
   border: 1px solid #d1d1d1;
   border-radius: 5px;
   background-color: white;
-  animation-name: anim;
-  animation-duration: 0.8s;
-
-  @keyframes anim {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
+  opacity: ${(props) => (props.show ? 1 : 0)};
+  transition: opacity 1s;
 `;
 
 const UserAccount = styled.div`

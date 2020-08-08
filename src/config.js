@@ -75,10 +75,15 @@ export const iconKaKao =
   "M12 4c-4.97 0-9 3.185-9 7.115 0 2.557 1.707 4.8 4.27 6.054-.188.702-.682 2.545-.78 2.94-.123.49.178.483.376.351.155-.103 2.466-1.675 3.464-2.353.541.08 1.1.123 1.67.123 4.97 0 9-3.186 9-7.115C21 7.185 16.97 4 12 4";
 export const signupAPI = "http://10.58.1.191:8001/account/sign-up";
 export const signinAPI = "http://10.58.1.191:8001/account/sign-in";
-export const signinkakaoAPI = "http://10.58.1.242:8001/account/kakao";
+export const signinkakaoAPI = "http://10.58.1.191:8001/account/kakao";
 export const mainsearchAPI = "http://10.58.1.191:8001/photo/search";
-export const userPageAPI = "http://10.58.1.191:8001/photo?user=username";
-
+export const userPageAPI = "http://10.58.1.191:8001/account?user_name=";
+export const myPageAPI = "http://10.58.1.191:8001/account?user";
+export const searchPageTagAPI = "http://10.58.1.191:8001/photo/tag?search=";
+export const userPagePhotoAPI = "http://10.58.1.191:8001/photo?user=";
+export const userCollectionAPI =
+  "http://10.58.1.191:8001/photo/related-collection?";
+export const userPageLikeAPI = "http://10.58.1.191:8001/photo?user=";
 export const colors = [
   "rgb(255,255,255)",
   "rgb(77,77,77)",

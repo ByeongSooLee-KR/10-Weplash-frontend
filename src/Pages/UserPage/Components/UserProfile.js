@@ -1,14 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import { iconFollow } from "../../../config";
+import { Link, withRouter } from "react-router-dom";
+import { iconFollow, userPageAPI } from "../../../config";
 
-const UserProfile = () => {
+const UserProfile = (props) => {
   const [userData, setUserData] = useState([]);
   const [followState, setFollowState] = useState(true);
 
   useEffect(() => {
-    fetch("/Data/userData.json")
+    fetch(`${userPageAPI}${props.userId}`)
       .then((res) => res.json())
       .then((res) => {
         setUserData(res.data);
@@ -17,6 +18,10 @@ const UserProfile = () => {
 
   const clickFollow = () => {
     setFollowState(!followState);
+  };
+
+  const clickTag = (e) => {
+    props.history.push(`/photo/${e}`);
   };
 
   return (
@@ -54,7 +59,11 @@ const UserProfile = () => {
             <TagContents>
               {userData.interests &&
                 userData.interests.map((el) => {
-                  return <p className="tag">{el}</p>;
+                  return (
+                    <div className="tag" onClick={() => clickTag(el)}>
+                      {el}
+                    </div>
+                  );
                 })}
             </TagContents>
           </TagBox>
@@ -64,7 +73,7 @@ const UserProfile = () => {
   );
 };
 
-export default UserProfile;
+export default withRouter(UserProfile);
 
 const ProfileContainer = styled.div`
   max-width: 750px;
@@ -177,6 +186,14 @@ const TagContents = styled.div`
     background-color: #f1f1f1;
     padding: 5px 5px 5px 7px;
     margin-right: 5px;
+
+    &:focus,
+    &:hover {
+      border: 1px solid black;
+      background-color: white;
+      color: black;
+      cursor: pointer;
+    }
   }
 `;
 

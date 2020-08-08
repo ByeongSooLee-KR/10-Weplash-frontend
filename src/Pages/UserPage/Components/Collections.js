@@ -3,11 +3,23 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import FooterIcon from "./FooterIcon";
+import { userCollectionAPI } from "../../../config";
+import RelatedCollections from "../../../Component/Modal/ModalContents/RelatedContents/RelatedCollections";
 
-const Collections = () => {
+const Collections = (props, activeTab) => {
+  const [userData, setUserData] = useState([]);
+
+  useEffect(() => {
+    fetch(`${userCollectionAPI}user=${props.userId}`)
+      .then((res) => res.json())
+      .then((res) => {
+        // setUserData(res.data);
+      });
+  }, [props.activeTab]);
+
   return (
     <CollectionWrap>
-      {/* <img src="https://images.unsplash.com/photo-1596564163975-40a015abf4e8?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80" /> */}
+      <RelatedCollections />
       <FooterIcon />
     </CollectionWrap>
   );
@@ -17,4 +29,5 @@ export default Collections;
 
 const CollectionWrap = styled.div`
   padding: 0 100px;
+  margin-top: 40px;
 `;

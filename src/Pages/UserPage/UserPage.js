@@ -13,29 +13,22 @@ import {
   iconCollection,
   iconStat,
   userPageAPI,
+  myPageAPI,
 } from "../../config";
-
-const obj = {
-  0: <Photos />,
-  1: <Likes />,
-  2: <Collections />,
-};
 
 const UserPage = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [userData, setUserData] = useState([]);
   const [userValidate, setUserValidate] = useState(false);
+  const [username, setUserName] = useState("");
   const history = useHistory();
   const userId = history.location.pathname.slice(10);
-
-  useEffect(() => {
-    fetch(`${userPageAPI}`)
-      .then((res) => res.json())
-      .then((res) => {
-        setUserData(res.data);
-        res.user && setUserValidate(true);
-      });
-  }, []);
+  const url = history.location.pathname;
+  const obj = {
+    0: <Photos userId={userId} />,
+    1: <Likes userId={userId} />,
+    2: <Collections userId={userId} />,
+  };
 
   const handleClick = (id) => {
     setActiveTab(id);
@@ -45,7 +38,7 @@ const UserPage = () => {
     <>
       <HeaderNav />
       <UserPageWrap>
-        {userValidate ? <MyProfile /> : <UserProfile />}
+        {url === "/UserPage" ? <MyProfile /> : <UserProfile userId={userId} />}
         <Icons>
           <StyledLink className="photo" onClick={() => handleClick(0)}>
             <svg viewBox="0 0 32 32">

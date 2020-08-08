@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
+import { myPageAPI } from "../../../config";
 
 const MyProfile = () => {
   const [isHidden, setIsHidden] = useState(true);
@@ -9,7 +10,12 @@ const MyProfile = () => {
   const [userData, setUserData] = useState([]);
 
   useEffect(() => {
-    fetch("/Data/userData.json")
+    const token = localStorage.getItem("access_token");
+    fetch(`${myPageAPI}=self`, {
+      headers: {
+        Authorization: token,
+      },
+    })
       .then((res) => res.json())
       .then((res) => {
         setUserData(res.data);

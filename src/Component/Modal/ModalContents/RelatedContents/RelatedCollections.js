@@ -2,14 +2,20 @@ import React from "react";
 import styled from "styled-components";
 import Collection from "../../../Collection/Collection";
 
-const RelatedCollections = ({ relatedCollections }) => {
+const RelatedCollections = ({ relatedCollections, userData }) => {
   return (
     <Container>
       <Title>Related collections</Title>
       <CollectionsContainer>
-        {relatedCollections.map((collection, i) => {
-          return <Collection collection={collection} key={i} />;
-        })}
+        {/* {!userData &&
+          relatedCollections.map((collection, i) => {
+            return <Collection collection={collection} key={i} />;
+          })} */}
+
+        {userData &&
+          userData.map((collection, i) => {
+            return <Collection collection={collection} key={i} />;
+          })}
       </CollectionsContainer>
     </Container>
   );

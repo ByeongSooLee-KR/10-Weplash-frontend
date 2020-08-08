@@ -1,17 +1,29 @@
 import React from "react";
+import Skeleton from "react-loading-skeleton";
 import styled from "styled-components";
 import CardTopBtns from "./CardTopBtns";
 import CardUser from "./CardUser";
 
-const Card = ({ card }) => {
+const Card = ({ card, newCards }) => {
   const height = (card.height * 416) / card.width;
   return (
     <CardFrame height={Math.round(height, 0)}>
-      <div className="hover">
-        <CardTopBtns data={card} />
-        <CardUser data={card} />
-      </div>
-      <img alt="imageCard" src={card.image} />
+      {(
+        <>
+          <div className="hover">
+            <CardTopBtns data={card} />
+            <CardUser data={card} />
+          </div>
+          <img alt="imageCard" src={card.image} />
+        </>
+      ) || (
+        <Skeleton
+          varient="rect"
+          width="416px"
+          height={height}
+          animation={false}
+        />
+      )}
     </CardFrame>
   );
 };

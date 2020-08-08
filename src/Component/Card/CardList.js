@@ -7,6 +7,7 @@ import Loading from "../Loading";
 
 const CardList = () => {
   const [cards, setCards] = useState([]);
+  const [newCards, setNewCards] = useState([]);
   const [offset, setOffset] = useState(0);
   const [loading, setLoading] = useState(false);
   const prevOffset = useRef(0);
@@ -37,7 +38,6 @@ const CardList = () => {
   });
 
   const handleScroll = (next) => {
-    console.log(next);
     if (next !== prevOffset.current) {
       fetch(
         `${TopicCardsAPI}?category=${"Travel"}&offset=${next}&limit=${LIMIT}`
@@ -45,6 +45,9 @@ const CardList = () => {
         .then((res) => res.json())
         .then((res) => {
           setCards([...cards, ...res.data]);
+          setNewCards(res.data);
+          console.log("res.data= ", res.data);
+          console.log("newCards= ", newCards);
           setLoading(false);
           prevOffset.current += 1;
         });
@@ -56,7 +59,7 @@ const CardList = () => {
       {loading && <Loading load={loading} />}
       {cards &&
         cards.map((card, idx) => {
-          return <Card key={idx} card={card} />;
+          return <Card key={idx} card={card} newCards={newCards} />;
         })}
     </CardListFrame>
   );

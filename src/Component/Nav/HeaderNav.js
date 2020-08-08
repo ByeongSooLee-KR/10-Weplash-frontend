@@ -28,7 +28,7 @@ const HeaderNav = ({ setSubmitModalState }) => {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/">Topics</Link>
+              <Link to="/CardList">Topics</Link>
             </li>
             <li className="dots">
               <div>

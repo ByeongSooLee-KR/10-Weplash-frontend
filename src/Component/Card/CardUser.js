@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link, withRouter, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { downloadBtnSvg } from "../../icons";
 import UserCard from "../UserCard/UserCard";
@@ -6,8 +7,15 @@ import theme from "../../Styles/StyleTheme";
 
 const CardUser = ({ data, userCardState }) => {
   const [show, setShow] = useState(false);
+  const history = useHistory();
 
-  return (
+  const clickUser = () => {
+    console.log();
+    history.push(`/account/@${data.user_name}`);
+  };
+  //10.58.1.242:8000/photo?user=photos
+
+  http: return (
     <CardUserFrame>
       <div
         className="mouseOver"
@@ -22,7 +30,7 @@ const CardUser = ({ data, userCardState }) => {
             show={show}
           />
         )}
-        <div className="userTag">
+        <div className="userTag" onClick={clickUser}>
           <img
             className="userImg"
             alt="userProfileImg"
@@ -35,7 +43,7 @@ const CardUser = ({ data, userCardState }) => {
     </CardUserFrame>
   );
 };
-export default CardUser;
+export default withRouter(CardUser);
 
 const {
   colors: { grayColor },

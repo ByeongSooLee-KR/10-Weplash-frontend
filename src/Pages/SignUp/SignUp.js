@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link, useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { signupAPI } from "../../config";
+import { signupAPI, iconKaKao } from "../../config";
 
 const SignUp = () => {
   const [userInfo, setUserInfo] = useState({
@@ -105,8 +105,10 @@ const SignUp = () => {
             </div>
           </RightTitle>
           <Button>
-            <img alt="구글 아이콘" src="Images/googleLogo.jpg" />
-            <ButtonText>Login with Google</ButtonText>
+            <svg viewBox="0 0 24 24">
+              <path d={iconKaKao}></path>
+            </svg>
+            <ButtonText>Login with KaKao</ButtonText>
           </Button>
           <OrText>OR</OrText>
           <FlexBetween>
@@ -298,15 +300,17 @@ const Button = styled.button`
   text-align: center;
   overflow: hidden;
 
-  img {
-    width: 80px;
-    margin-right: -20px;
+  svg {
+    width: 24px;
+    height: 24px;
+    margin-right: 5px;
+    fill: #783c00;
   }
 `;
 
 const ButtonText = styled.p`
   font-size: 15px;
-  color: black;
+  color: #783c00;
   text-align: center;
 `;
 

@@ -69,6 +69,7 @@ const CardList = () => {
         cards.map((card, id) => {
           return (
             <Card
+              key={id}
               id={id}
               card={card}
               color={colors.map((color) => {

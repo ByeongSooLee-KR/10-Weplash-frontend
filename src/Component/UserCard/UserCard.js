@@ -6,14 +6,14 @@ const UserCard = ({ show, cardUserImg, cardUserName, cardUserId }) => {
   const [user, setUserCard] = useState([]);
 
   useEffect(() => {
-    fetch("/Data/user.json")
+    fetch(`http://10.58.1.191:8000/photo/user-card/${cardUserId}`)
       .then((res) => res.json())
       .then((res) => {
-        setUserCard(res.data.user1);
+        setUserCard(res.data);
       });
   }, []);
 
-  const uploadedImg = user.uploadedImg;
+  const photos = user.photos;
   return (
     <UserCardFrame show={show}>
       <UserAccount>
@@ -24,15 +24,26 @@ const UserCard = ({ show, cardUserImg, cardUserName, cardUserId }) => {
         </div>
       </UserAccount>
       <UserUploadImg>
-        {uploadedImg &&
-          uploadedImg.map((item, i) => {
+        {photos &&
+          photos.map((item, i) => {
             return <FeatureImg key={i} img={`url("${item}")`} />;
           })}
       </UserUploadImg>
-      <FollowButton>
-        {followBtnSvg}
-        <p>Follow</p>
-      </FollowButton>
+      {user.follow === "self" && (
+        <ViewProfileButton>
+          <p>ViewProfile</p>
+        </ViewProfileButton>
+      )}
+      {user.follow ? (
+        <FollowingButton>
+          <p>Following</p>
+        </FollowingButton>
+      ) : (
+        <FollowButton>
+          {followBtnSvg}
+          <p>Follow</p>
+        </FollowButton>
+      )}
       <UserCardArrow />
     </UserCardFrame>
   );
@@ -91,6 +102,26 @@ const FeatureImg = styled.div`
   height: 85px;
   margin: 0 1px;
   vertical-align: middle;
+  cursor: pointer;
+`;
+
+const ViewProfileButton = styled.button`
+  width: 100%;
+  padding: 11px;
+  color: white;
+  border-radius: 4px;
+  border: 1px solid #d1d1d1;
+  background-color: white;
+  cursor: pointer;
+`;
+
+const FollowingButton = styled.button`
+  width: 100%;
+  padding: 11px;
+  color: white;
+  border-radius: 4px;
+  border: 1px solid #d1d1d1;
+  background-color: white;
   cursor: pointer;
 `;
 

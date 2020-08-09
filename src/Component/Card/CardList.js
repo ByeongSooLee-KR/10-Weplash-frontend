@@ -1,16 +1,24 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-
 import { TopicCardsAPI } from "../../config";
 import Card from "./Card";
 import Loading from "../Loading";
 
 const CardList = () => {
   const [cards, setCards] = useState([]);
+  const [colors, setColors] = useState([]);
   const [offset, setOffset] = useState(0);
   const [loading, setLoading] = useState(false);
   const prevOffset = useRef(0);
   const LIMIT = 20;
+
+  useEffect(() => {
+    fetch(`${TopicCardsAPI}/back/${"Travel"}?offset=${offset}&limit=${LIMIT}`)
+      .then((res) => res.json())
+      .then((res) => {
+        setColors(res.data);
+      });
+  }, []);
 
   useEffect(() => {
     fetch(
@@ -23,12 +31,17 @@ const CardList = () => {
   }, []);
 
   const checkScrollHeight = () => {
-    const scrollTop = document.documentElement.scrollTop;
-    if (scrollTop > 2000 + offset * 2000) {
-      setOffset(offset + 1);
-      setLoading(true);
-      handleScroll(offset + 1);
-    }
+    window.onscroll = function () {
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 100
+      ) {
+        console.log("atbottom");
+        setOffset(offset + 1);
+        setLoading(true);
+        handleScroll(offset + 1);
+      }
+    };
   };
 
   useEffect(() => {
@@ -37,8 +50,13 @@ const CardList = () => {
   });
 
   const handleScroll = (next) => {
-    console.log(next);
     if (next !== prevOffset.current) {
+      fetch(`${TopicCardsAPI}/back/${"Travel"}?offset=${offset}&limit=${LIMIT}`)
+        .then((res) => res.json())
+        .then((res) => {
+          setColors([...colors, ...res.data]);
+        });
+
       fetch(
         `${TopicCardsAPI}?category=${"Travel"}&offset=${next}&limit=${LIMIT}`
       )
@@ -46,8 +64,8 @@ const CardList = () => {
         .then((res) => {
           setCards([...cards, ...res.data]);
           setLoading(false);
-          prevOffset.current += 1;
         });
+      prevOffset.current += 1;
     }
   };
 
@@ -55,8 +73,17 @@ const CardList = () => {
     <CardListFrame>
       {loading && <Loading load={loading} />}
       {cards &&
-        cards.map((card, idx) => {
-          return <Card key={idx} card={card} />;
+        cards.map((card, id) => {
+          return (
+            <Card
+              key={id}
+              id={id}
+              card={card}
+              color={colors.map((color) => {
+                return color.background_color;
+              })}
+            />
+          );
         })}
     </CardListFrame>
   );

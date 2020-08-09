@@ -7,10 +7,11 @@ const {
   colors: { grayColor, redColor },
 } = theme;
 
-const CardTopBtns = () => {
+const CardTopBtns = ({ img }) => {
   const [like, setLikeBtn] = useState(false);
   const handleLikeBtn = () => {
     setLikeBtn(!like);
+
     // fetch(likeAPI, {
     //   method: "POST",
     //   headers: {
@@ -21,7 +22,7 @@ const CardTopBtns = () => {
   };
 
   const [collect, setCollectBtn] = useState(false);
-  const handlecollectBtn = () => {
+  const handleCollectBtn = () => {
     setCollectBtn(!collect);
     // fetch(collectAPI, {
     //   method: "POST",
@@ -43,8 +44,8 @@ const CardTopBtns = () => {
       </Buttons>
       <Buttons
         active={collect}
-        // onClick={() => handlecollectBtn(id)}
-        onClick={handlecollectBtn}
+        // onClick={() => handleCollectBtn(id)}
+        onClick={handleCollectBtn}
       >
         {collectBtnSvg}
       </Buttons>

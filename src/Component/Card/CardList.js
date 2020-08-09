@@ -1,19 +1,24 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-
 import { TopicCardsAPI } from "../../config";
 import Card from "./Card";
 import Loading from "../Loading";
 
 const CardList = () => {
   const [cards, setCards] = useState([]);
-  const [newCards, setNewCards] = useState([]);
+  const [colors, setColors] = useState([]);
   const [offset, setOffset] = useState(0);
   const [loading, setLoading] = useState(false);
   const prevOffset = useRef(0);
   const LIMIT = 20;
 
   useEffect(() => {
+    fetch(`${TopicCardsAPI}/back/${"Travel"}?offset=${offset}&limit=${LIMIT}`)
+      .then((res) => res.json())
+      .then((res) => {
+        setColors(res.data);
+      });
+
     fetch(
       `${TopicCardsAPI}?category=${"Travel"}&offset=${offset}&limit=${LIMIT}`
     )
@@ -39,18 +44,21 @@ const CardList = () => {
 
   const handleScroll = (next) => {
     if (next !== prevOffset.current) {
+      fetch(`${TopicCardsAPI}/back/${"Travel"}?offset=${offset}&limit=${LIMIT}`)
+        .then((res) => res.json())
+        .then((res) => {
+          setColors([...colors, ...res.data]);
+        });
+
       fetch(
         `${TopicCardsAPI}?category=${"Travel"}&offset=${next}&limit=${LIMIT}`
       )
         .then((res) => res.json())
         .then((res) => {
           setCards([...cards, ...res.data]);
-          setNewCards(res.data);
-          console.log("res.data= ", res.data);
-          console.log("newCards= ", newCards);
           setLoading(false);
-          prevOffset.current += 1;
         });
+      prevOffset.current += 1;
     }
   };
 
@@ -58,8 +66,16 @@ const CardList = () => {
     <CardListFrame>
       {loading && <Loading load={loading} />}
       {cards &&
-        cards.map((card, idx) => {
-          return <Card key={idx} card={card} newCards={newCards} />;
+        cards.map((card, id) => {
+          return (
+            <Card
+              id={id}
+              card={card}
+              color={colors.map((color) => {
+                return color.background_color;
+              })}
+            />
+          );
         })}
     </CardListFrame>
   );

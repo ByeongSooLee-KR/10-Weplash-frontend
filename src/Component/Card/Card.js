@@ -1,29 +1,37 @@
 import React from "react";
-import Skeleton from "react-loading-skeleton";
 import styled from "styled-components";
 import CardTopBtns from "./CardTopBtns";
 import CardUser from "./CardUser";
 
-const Card = ({ card, newCards }) => {
+const Card = ({ card, color, id }) => {
   const height = (card.height * 416) / card.width;
+
+  const observer = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.backgroundColor = entry.target.dataset.src;
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { rootMargin: "0px 0px -200px 0px" }
+  );
+  document.querySelectorAll(".imageCard").forEach((img) => {
+    observer.observe(img);
+  });
+
   return (
-    <CardFrame height={Math.round(height, 0)}>
-      {(
+    <CardFrame height={Math.round(height, 0)} color={color[id]}>
+      {
         <>
           <div className="hover">
             <CardTopBtns data={card} />
             <CardUser data={card} />
           </div>
-          <img alt="imageCard" src={card.image} />
+          <img alt="" className="imageCard" src={card.image} />
         </>
-      ) || (
-        <Skeleton
-          varient="rect"
-          width="416px"
-          height={height}
-          animation={false}
-        />
-      )}
+      }
     </CardFrame>
   );
 };
@@ -35,6 +43,7 @@ const CardFrame = styled.figure`
   display: inline-block;
   width: 416px;
   height: ${(props) => `${props.height}px`};
+
   margin-bottom: 23px;
   cursor: zoom-in;
 
@@ -57,8 +66,10 @@ const CardFrame = styled.figure`
     }
   }
 
-  img {
+  .imageCard {
+    display: block;
     width: 100%;
-    vertical-align: middle;
+    height: ${(props) => `${props.height}px`};
+    background-color: ${(props) => props.color};
   }
 `;

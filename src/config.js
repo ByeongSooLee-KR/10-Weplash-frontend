@@ -1,1 +1,1 @@
-export const TopicCardsAPI = "http://10.58.2.111:8000/photo";
+export const TopicCardsAPI = "http://10.58.7.218:8000/photo";

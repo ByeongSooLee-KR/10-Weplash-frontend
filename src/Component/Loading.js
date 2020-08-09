@@ -5,7 +5,7 @@ import theme from "../Styles/StyleTheme";
 const Loading = () => {
   return (
     <LoadingFrame colors={theme.colors}>
-      <div class="loadBar">
+      <div className="loadBar">
         <div></div>
       </div>
     </LoadingFrame>

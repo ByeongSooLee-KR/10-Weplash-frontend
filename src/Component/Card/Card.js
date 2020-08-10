@@ -1,17 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import CardTopBtns from "./CardTopBtns";
 import CardUser from "./CardUser";
 
-const Card = ({ card }) => {
+const Card = ({ card, color, id }) => {
+  const [show, setShow] = useState(false);
   const height = (card.height * 416) / card.width;
+
+  const options = { thershold: 1.0 };
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        observer.unobserve(entry.target);
+        entry.target.backgroundColor = entry.target.color;
+      }
+    });
+  }, options);
+  document.querySelectorAll(".imageCard").forEach((img) => {
+    observer.observe(img);
+  });
+
   return (
-    <CardFrame height={Math.round(height, 0)}>
-      <div className="hover">
-        <CardTopBtns data={card} />
-        <CardUser data={card} />
-      </div>
-      <img alt="imageCard" src={card.image} />
+    <CardFrame height={Math.round(height, 0)} color={color[id]}>
+      {
+        <div
+          onMouseEnter={() => setShow(true)}
+          onMouseLeave={() => setShow(false)}
+        >
+          {show && (
+            <div className="hover">
+              <CardTopBtns data={card} img={card.image} id={id} />
+              <CardUser data={card} />
+            </div>
+          )}
+          <img alt="" className="imageCard" src={card.image} color={color} />
+        </div>
+      }
     </CardFrame>
   );
 };
@@ -27,7 +51,6 @@ const CardFrame = styled.figure`
   cursor: zoom-in;
 
   .hover {
-    opacity: 0;
     position: absolute;
     display: flex;
     justify-content: space-between;
@@ -38,15 +61,12 @@ const CardFrame = styled.figure`
     height: 100%;
     background-color: rgba(0, 0, 0, 0.3);
     transition: 0.2s;
-
-    &:hover {
-      opacity: 1;
-      transition: 0.2s;
-    }
   }
 
-  img {
+  .imageCard {
+    display: block;
     width: 100%;
-    vertical-align: middle;
+    height: ${(props) => `${props.height}px`};
+    background-color: ${(props) => props.color};
   }
 `;

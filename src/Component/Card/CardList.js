@@ -34,6 +34,7 @@ const CardList = () => {
     )
       .then((res) => res.json())
       .then((res) => {
+        console.log(res.data);
         setCards(res.data);
       });
     //eslint-disable-next-line react-hooks/exhaustive-deps

@@ -1,6 +1,6 @@
 import React from "react";
 
-export const TopicCardsAPI = "http://10.58.1.191:8000/photo";
+export const TopicCardsAPI = "http://10.58.1.242:8000/photo";
 export const iconPhoto =
   "M12,0C5.373,0,0,4.238,0,9.465c0,3.403,2.277,6.386,5.693,8.054 c-0.251,0.935-0.909,3.387-1.04,3.912c-0.163,0.65,0.239,0.643,0.502,0.4M10.8 18.2667L14.5333 22.6667L19.7333 16L26.4 24.9333H5.6L10.8 18.2667ZM29.3333 28V4C29.3333 3.2 28.8 2.66667 28 2.66667H4C3.2 2.66667 2.66667 3.2 2.66667 4V28C2.66667 28.8 3.2 29.3333 4 29.3333H28C28.8 29.3333 29.3333 28.8 29.3333 28Z67c0.206-0.138,3.288-2.229,4.618-3.13 c0.722,0.106,1.466,0.163,2.227,0.163c6.627,0,12-4.238,12-9.466C24,4.238,18.627,0,12,0";
 export const iconLike =
@@ -72,8 +72,21 @@ export const iconFaceBook =
   "M21 12.1c0-5-4-9-9-9s-9 4-9 9c0 4.5 3.3 8.2 7.6 8.9v-6.3H8.3v-2.6h2.3v-2c0-2.2 1.4-3.5 3.4-3.5 1 0 2 .2 2 .2V9h-1c-1.1 0-1.4.7-1.4 1.4v1.7H16l-.4 2.6h-2.1V21c4.2-.7 7.5-4.4 7.5-8.9";
 export const iconKaKao =
   "M12 4c-4.97 0-9 3.185-9 7.115 0 2.557 1.707 4.8 4.27 6.054-.188.702-.682 2.545-.78 2.94-.123.49.178.483.376.351.155-.103 2.466-1.675 3.464-2.353.541.08 1.1.123 1.67.123 4.97 0 9-3.186 9-7.115C21 7.185 16.97 4 12 4";
-export const signupAPI = "http://10.58.7.113:8000/account/sign-up";
-export const signinAPI = "http://10.58.7.113:8000/account/sign-in";
+export const signupAPI = "http://10.58.7.242:8000/account/sign-up";
+export const signinAPI = "http://10.58.7.242:8000/account/sign-in";
 export const signinkakaoAPI = "http://10.58.1.242:8001/account/kakao";
-export const mainsearchAPI = "http://10.58.1.191:8000/photo/search";
+export const mainsearchAPI = "http://10.58.1.242:8000/photo/search";
 export const userPageAPI = "http://10.58.1.242:8001/photo?user=username";
+
+export const colors = [
+  "rgb(255,255,255)",
+  "rgb(77,77,77)",
+  "rgb(252,220,77)",
+  "rgb(254,146,0)",
+  "rgb(244,78,59)",
+  "rgb(123,100,255)",
+  "rgb(171,20,158)",
+  "rgb(164,221,0)",
+  "rgb(104,204,202)",
+  "rgb(0,156,224)",
+];

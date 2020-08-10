@@ -23,7 +23,6 @@ const Card = ({ card, color, id, onClickModal, userCardState }) => {
   const [collectionModalActive, setCollectionModalActive] = useState(false);
 
   return (
-    // <CardFrame color={color[id]}>
     <CardFrame>
       <div
         onMouseEnter={() => setShow(true)}

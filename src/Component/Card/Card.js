@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import CardTopBtns from "./CardTopBtns";
 import CardUser from "./CardUser";
+import CollectionModal from "../Collection/CollectionModal";
 
-const Card = ({ card, color, id }) => {
+const Card = ({ card, color, id, onClickModal, userCardState }) => {
   const [show, setShow] = useState(false);
-  const height = (card.height * 416) / card.width;
 
   const options = { thershold: 1.0 };
   const observer = new IntersectionObserver((entries, observer) => {
@@ -20,28 +20,53 @@ const Card = ({ card, color, id }) => {
     observer.observe(img);
   });
 
+  const [collectionModalActive, setCollectionModalActive] = useState(false);
+
   return (
-    <CardFrame height={Math.round(height, 0)} color={color[id]}>
-      {
-        <div
-          onMouseEnter={() => setShow(true)}
-          onMouseLeave={() => setShow(false)}
-        >
-          {show && (
-            <div className="hover">
-              <CardTopBtns data={card} img={card.image} id={id} />
-              <CardUser data={card} />
-            </div>
-          )}
-          <img alt="" className="imageCard" src={card.image} color={color} />
-        </div>
-      }
+    // <CardFrame color={color[id]}>
+    <CardFrame>
+      <div
+        onMouseEnter={() => setShow(true)}
+        onMouseLeave={() => setShow(false)}
+      >
+        {show && (
+          <CardTopBtns
+            data={card}
+            img={card.image}
+            id={id}
+            setCollectionModalActive={setCollectionModalActive}
+            collectionModalActive={collectionModalActive}
+          />
+        )}
+        {show && <CardUser data={card} userCardState={userCardState} />}
+        {show && <HoverStyle onClick={() => onClickModal(card.id, id)} />}
+        <img alt="" className="imageCard" src={card.image} color={color} />
+      </div>
+      {collectionModalActive && (
+        <CollectionModal
+          collectionModalActive={collectionModalActive}
+          setCollectionModalActive={setCollectionModalActive}
+        />
+      )}
     </CardFrame>
   );
 };
 
 export default Card;
 
+const HoverStyle = styled.div`
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-self: flex-start;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  transition: 0.2s;
+`;
 const CardFrame = styled.figure`
   position: relative;
   display: inline-block;
@@ -50,21 +75,8 @@ const CardFrame = styled.figure`
   margin-bottom: 23px;
   cursor: zoom-in;
 
-  .hover {
-    position: absolute;
-    display: flex;
-    justify-content: space-between;
-    align-self: flex-start;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.3);
-    transition: 0.2s;
-  }
-
   .imageCard {
-    display: block;
+    /* display: block; */
     width: 100%;
     height: ${(props) => `${props.height}px`};
     background-color: ${(props) => props.color};

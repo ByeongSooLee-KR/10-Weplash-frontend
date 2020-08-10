@@ -4,7 +4,7 @@ import { downloadBtnSvg } from "../../icons";
 import UserCard from "../UserCard/UserCard";
 import theme from "../../Styles/StyleTheme";
 
-const CardUser = ({ data }) => {
+const CardUser = ({ data, userCardState }) => {
   const [show, setShow] = useState(false);
 
   return (
@@ -14,7 +14,7 @@ const CardUser = ({ data }) => {
         onMouseEnter={() => setShow(true)}
         onMouseLeave={() => setShow(false)}
       >
-        {show && (
+        {show && userCardState && (
           <UserCard
             cardUserId={data.user_name}
             cardUserName={data.user_first_name + data.user_last_name}
@@ -42,6 +42,9 @@ const {
 } = theme;
 
 const CardUserFrame = styled.div`
+  position: absolute;
+  bottom: 0px;
+  z-index: 10;
   display: flex;
   width: 100%;
   align-items: flex-end;

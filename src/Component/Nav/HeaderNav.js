@@ -10,7 +10,7 @@ const HeaderNav = () => {
     <header>
       <NavContainer>
         <SearchContainer>
-          <Link>{HomeSvg}</Link>
+          <Link to="/">{HomeSvg}</Link>
           <SearchBar inputBg={inputBg}>
             <form>
               <button>{SearchSvg}</button>
@@ -25,10 +25,10 @@ const HeaderNav = () => {
         <HomeContainer className="2">
           <ul>
             <li>
-              <Link>Home</Link>
+              <Link to="/">Home</Link>
             </li>
             <li>
-              <Link>Topics</Link>
+              <Link to="/">Topics</Link>
             </li>
             <li className="dots">
               <div>

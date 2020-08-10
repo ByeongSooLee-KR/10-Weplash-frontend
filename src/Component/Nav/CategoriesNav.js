@@ -5,7 +5,7 @@ import { navData } from "./navData";
 
 const Category = ({ category }) => {
   return (
-    <Link>
+    <Link to="/">
       <li>{category}</li>
     </Link>
   );
@@ -18,8 +18,8 @@ const CategoriesNav = () => {
     <CategoryContainer>
       <Left>
         <ul>
-          {editorials.map((category) => {
-            return <Category category={category} />;
+          {editorials.map((category, i) => {
+            return <Category category={category} key={i} />;
           })}
         </ul>
       </Left>
@@ -27,8 +27,8 @@ const CategoriesNav = () => {
       <Categories>
         <div>
           <ul>
-            {categories.map((category) => {
-              return <Category category={category} />;
+            {categories.map((category, i) => {
+              return <Category category={category} key={i} />;
             })}
           </ul>
         </div>

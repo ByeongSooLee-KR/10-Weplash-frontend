@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { HomeSvg, SearchSvg, DotSvg, AlarmSvg } from "../../Svg/svg";
 
-const HeaderNav = () => {
+const HeaderNav = ({ setSubmitModalState }) => {
   const [inputBg, setInputBg] = useState(false);
 
   return (
@@ -39,7 +39,7 @@ const HeaderNav = () => {
         </HomeContainer>
         <BtnContainer>
           <SubmitPhoto>
-            <button>
+            <button onClick={() => setSubmitModalState(true)}>
               Submit
               <span> a photo</span>
             </button>

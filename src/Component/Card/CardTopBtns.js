@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { likeBtnSvg, collectBtnSvg } from "../../icons";
+import { TopicCardsAPI, tokentoken } from "../../config";
 import theme from "../../Styles/StyleTheme";
 
 const {
@@ -8,50 +9,39 @@ const {
 } = theme;
 
 const CardTopBtns = ({
-  img,
+  data,
+  show,
   collectionModalActive,
   setCollectionModalActive,
 }) => {
-  const [like, setLikeBtn] = useState(false);
+  console.log("btn에서 찍는 콘솔", data.user_collection);
+  const [like, setLikeBtn] = useState(data.user_like);
   const handleLikeBtn = () => {
-    setLikeBtn(!like);
-
-    // fetch(likeAPI, {
-    //   method: "POST",
-    //   headers: {
-    //     access_token: localStorage.getItem("access_token"),
-    //   },
-    //   body: JSON.stringify({ imageId: id }),
-    // })   API 구현 후 주석 해제하겠습니다 :o
+    fetch(`${TopicCardsAPI}/heart`, {
+      method: "PATCH",
+      headers: {
+        Authorization: tokentoken,
+      },
+      body: JSON.stringify({
+        photo_id: data.id,
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => setLikeBtn(res.user_like));
   };
 
-  const [collect, setCollectBtn] = useState(false);
+  const [collect, setCollectBtn] = useState(data.user_collection);
   const handleCollectBtn = () => {
     setCollectBtn(!collect);
     setCollectionModalActive(!collectionModalActive);
-    // fetch(collectAPI, {
-    //   method: "POST",
-    //   headers: {
-    //     access_token: localStorage.getItem("access_token"),
-    //   },
-    //   body: JSON.stringify({ imageId: id }),
-    // })   API 구현 후 주석 해제하겠습니다 :o
   };
 
   return (
-    <CardTopBtnsFrame>
-      <Buttons
-        active={like}
-        // onClick={() => handleLikeBtn(id)}
-        onClick={handleLikeBtn}
-      >
+    <CardTopBtnsFrame show={show}>
+      <Buttons btn="like" active={like} onClick={handleLikeBtn}>
         {likeBtnSvg}
       </Buttons>
-      <Buttons
-        active={collect}
-        // onClick={() => handleCollectBtn(id)}
-        onClick={handleCollectBtn}
-      >
+      <Buttons btn="collect" active={collect} onClick={handleCollectBtn}>
         {collectBtnSvg}
       </Buttons>
     </CardTopBtnsFrame>
@@ -62,10 +52,10 @@ export default CardTopBtns;
 
 const CardTopBtnsFrame = styled.div`
   position: absolute;
-  z-index: 10;
-  display: flex;
   top: 20px;
   right: 20px;
+  display: ${({ show }) => (show ? "flex" : "none")};
+  z-index: 10;
 `;
 
 const Buttons = styled.button`
@@ -74,13 +64,17 @@ const Buttons = styled.button`
   padding: 6px 12px;
   border-style: none;
   border-radius: 4px;
-  background-color: ${({ active }) => (active ? redColor : "white")};
   outline: none;
+  background-color: ${({ active, btn }) =>
+    active &&
+    (btn === "like" ? redColor : btn === "collect" ? "#3cb46e" : "white")};
   cursor: pointer;
+
   svg {
     width: 16px;
     fill: ${({ active }) => (active ? "white" : grayColor)};
   }
+
   &:hover {
     opacity: 1;
   }

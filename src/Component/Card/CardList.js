@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import { TopicCardsAPI } from "../../config";
 import Card from "./Card";
 import Modal from "../Modal/Modal";
 import Loading from "../Loading";
+import { TopicCardsAPI, tokentoken } from "../../config";
 
-const CardList = () => {
+const CardList = ({ topic }) => {
+  const isLoaded = topic[0] !== undefined;
   const [cards, setCards] = useState([]);
   const [colors, setColors] = useState([]);
   const [offset, setOffset] = useState(0);
@@ -19,26 +20,26 @@ const CardList = () => {
   const prevOffset = useRef(0);
   const LIMIT = 20;
 
-  useEffect(() => {
-    fetch(`${TopicCardsAPI}/back/${"Travel"}?offset=${offset}&limit=${LIMIT}`)
+  const fetchData = (api, data, setData) => {
+    fetch(`${TopicCardsAPI}${api}offset=${offset}&limit=${LIMIT}`, {
+      headers: {
+        // Authorization: localStorage.getItem("access_token"),
+        Authorization: tokentoken,
+      },
+    })
       .then((res) => res.json())
       .then((res) => {
-        setColors(res.data);
+        setData([...data, ...res.data]);
+        setLoading(false);
       });
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  };
 
   useEffect(() => {
-    fetch(
-      `${TopicCardsAPI}?category=${"Travel"}&offset=${offset}&limit=${LIMIT}`
-    )
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res.data);
-        setCards(res.data);
-      });
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (isLoaded) {
+      fetchData(`/back/${topic[0].collection}?`, colors, setColors);
+      fetchData(`?category=${topic[0].collection}&`, cards, setCards);
+    }
+  }, [isLoaded]);
 
   const checkScrollHeight = () => {
     window.onscroll = function () {
@@ -46,7 +47,6 @@ const CardList = () => {
         window.innerHeight + window.scrollY >=
         document.body.offsetHeight - 100
       ) {
-        console.log("atbottom");
         setOffset(offset + 1);
         setLoading(true);
         handleScroll(offset + 1);
@@ -61,20 +61,8 @@ const CardList = () => {
 
   const handleScroll = (next) => {
     if (next !== prevOffset.current) {
-      fetch(`${TopicCardsAPI}/back/${"Travel"}?offset=${offset}&limit=${LIMIT}`)
-        .then((res) => res.json())
-        .then((res) => {
-          setColors([...colors, ...res.data]);
-        });
-
-      fetch(
-        `${TopicCardsAPI}?category=${"Travel"}&offset=${next}&limit=${LIMIT}`
-      )
-        .then((res) => res.json())
-        .then((res) => {
-          setCards([...cards, ...res.data]);
-          setLoading(false);
-        });
+      fetchData(`/back/${topic[0].collection}?`, colors, setColors);
+      fetchData(`?category=${topic[0].collection}&`, cards, setCards);
       prevOffset.current += 1;
     }
   };
@@ -146,8 +134,8 @@ const CardList = () => {
 export default CardList;
 
 const CardListFrame = styled.div`
-  width: 1320px;
   margin: 0 auto;
+  width: 1320px;
   column-width: 416px;
   column-gap: 5px;
 `;

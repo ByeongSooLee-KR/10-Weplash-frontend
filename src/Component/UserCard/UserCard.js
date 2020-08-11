@@ -11,6 +11,7 @@ const UserCard = ({ show, cardUserImg, cardUserName, cardUserId }) => {
       .then((res) => {
         setUserCard(res.data);
       });
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const photos = user.photos;
@@ -25,8 +26,8 @@ const UserCard = ({ show, cardUserImg, cardUserName, cardUserId }) => {
       </UserAccount>
       <UserUploadImg>
         {photos &&
-          photos.map((item, i) => {
-            return <FeatureImg key={i} img={`url("${item}")`} />;
+          photos.map((item, idx) => {
+            return <FeatureImg key={idx} img={`url("${item}")`} />;
           })}
       </UserUploadImg>
       {user.follow === "self" && (
@@ -58,8 +59,17 @@ const UserCardFrame = styled.div`
   border: 1px solid #d1d1d1;
   border-radius: 5px;
   background-color: white;
-  opacity: ${(props) => (props.show ? 1 : 0)};
-  transition: opacity 1s;
+  animation-name: anime;
+  animation-duration: 1s;
+
+  @keyframes anime {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 `;
 
 const UserAccount = styled.div`

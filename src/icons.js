@@ -66,3 +66,27 @@ export const deleteBtnSvg = (
     <path d="M25.33 8.55l-1.88-1.88-7.45 7.45-7.45-7.45-1.88 1.88 7.45 7.45-7.45 7.45 1.88 1.88 7.45-7.45 7.45 7.45 1.88-1.88-7.45-7.45z"></path>
   </svg>
 );
+
+export const checkedSvg = (
+  <svg version="1.1" viewBox="0 0 32 32" aria-hidden="false">
+    <path d="M28.1 5.2L11.7 21.6l-7.8-7.8-3.4 3.3 11.2 11.2L31.5 8.6z"></path>
+  </svg>
+);
+
+export const uncheckedSvg = (
+  <svg version="1.1" viewBox="0 0 32 32" aria-hidden="false">
+    <path d="M3.5 13.6h25v4.9h-25z"></path>
+  </svg>
+);
+
+export const addCollectionSvg = (
+  <svg version="1.1" viewBox="0 0 32 32" aria-hidden="false">
+    <path d="M18.4 13.6V3.5h-4.8v10.1H3.5v4.8h10.1v10.1h4.8V18.4h10.1v-4.8z"></path>
+  </svg>
+);
+
+export const lockSvg = (
+  <svg version="1.1" viewBox="0 0 32 32" aria-hidden="false">
+    <path d="M27.4 15.2h-1.6v-5.4c0-2.5-1-5.1-2.9-7-1.5-1.8-4-2.8-6.9-2.8s-5.1 1.3-7 2.9c-1.9 1.9-2.8 4.1-2.8 6.9v5.4h-1.6c-.6 0-1.3.6-1.3 1.3v14.3c0 .6.7 1.2 1.3 1.2h22.8c.6 0 1.3-.6 1.3-1.3v-14.2c0-.7-.7-1.3-1.3-1.3zm-16.5-5.4c0-1.6.6-2.9 1.6-3.8 1-.9 2.2-1.6 3.5-1.6s2.5.6 3.5 1.6c1 .9 1.6 2.2 1.6 3.8v5.4h-10.2v-5.4z"></path>
+  </svg>
+);

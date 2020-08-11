@@ -34,7 +34,12 @@ const Card = ({ card, color, id, onClickModal, isModalActive }) => {
               <CardUser isModalActive={isModalActive} data={card} />
             </div>
           )}
-          <img alt="" className="imageCard" src={card.image} color={color} />
+          <img
+            alt="ImageCard"
+            className="imageCard"
+            src={card.image}
+            color={color}
+          />
         </div>
       }
     </CardFrame>

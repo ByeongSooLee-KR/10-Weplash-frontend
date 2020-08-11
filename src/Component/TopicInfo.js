@@ -1,26 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { statusSvg, contributionsSvg, topConributorsSvg } from "../icons";
 
-const TopicInfo = () => {
-  const [data, getData] = useState([]);
-  useEffect(() => {
-    fetch("/Data/data.json")
-      .then((res) => res.json())
-      .then((res) => {
-        getData(res.data);
-      });
-  }, []);
-
+const TopicInfo = ({ data }) => {
   return (
     <TopicInfoFrame>
       <section>
-        <h1>{data.topicTitle}</h1>
-        <h2>{data.topicDesc}</h2>
-        <img alt="ProfileImg" src={data.curatedImgUrl}></img>
+        <h1>{data[0] && data[0].collection}</h1>
+        <h2>{data[0] && data[0].description}</h2>
         <p>
-          Curated by <Link to="">{data.curatedBy}</Link>
+          Supported by
+          <Link to="">
+            <img
+              alt="Supporter"
+              src="https://images.unsplash.com/file-1594221993978-c8dc66413675image"
+            />
+          </Link>
         </p>
       </section>
       <TopicStatus>
@@ -30,21 +26,34 @@ const TopicInfo = () => {
             <span>Status</span>
             <p className="openclose">
               <span>●</span>
-              {data.status}
+              OPEN
             </p>
           </figure>
           <figure>
             {contributionsSvg}
             <span>Contributions</span>
-            <p>{data.contributions}</p>
+            <p>{data[0] && data[0].contributions}</p>
           </figure>
           <figure>
-            {topConributorsSvg}
-            <span>Top Contributors</span>
-            <p>{data.topcontributors}</p>
+            <section>
+              {topConributorsSvg}
+              <span>Top Contributors</span>
+            </section>
+            <section className="contributorsImg">
+              {data[0] &&
+                data[0].topcontributors.map((profile, idx) => {
+                  return (
+                    <img
+                      key={idx}
+                      alt="ProfileImg"
+                      src={profile.profile_image}
+                    />
+                  );
+                })}
+            </section>
           </figure>
         </div>
-        <button>Submit to {data.topicTitle}</button>
+        <button>Submit to {data[0] && data[0].collection}</button>
       </TopicStatus>
     </TopicInfoFrame>
   );
@@ -75,24 +84,17 @@ const TopicInfoFrame = styled.div`
     }
 
     img {
-      border-radius: 50%;
-      border: 1px solid rgba(0, 0, 0, 0.1);
+      width: 150px;
+      margin-left: 10px;
     }
 
     p {
+      display: flex;
+      align-items: center;
       margin-top: 8px;
       font-size: 15px;
       font-family: sans-serif;
-      color: ${(props) => props.theme.colors.blackColor};
-
-      a {
-        text-decoration: underline;
-        font-family: sans-serif;
-        color: ${(props) => props.theme.colors.grayColor};
-        &:hover {
-          color: black;
-        }
-      }
+      color: ${(props) => props.theme.colors.grayColor};
     }
   }
 `;
@@ -124,6 +126,7 @@ const TopicStatus = styled.div`
       }
 
       .openclose {
+        color: #111;
         padding: 1px 8px;
         border-radius: 4px;
         background-color: #c2ebd3;
@@ -135,7 +138,14 @@ const TopicStatus = styled.div`
       }
     }
   }
-
+  .contributorsImg {
+    img {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  }
   button {
     width: 100%;
     height: 44px;

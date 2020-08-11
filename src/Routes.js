@@ -22,6 +22,9 @@ class Routes extends React.Component {
           <Route exact path="/account/:id/" component={UserPage} />
           <Route exact path="/photo?search=/:id" component={SearchPage} />
           <Route exact path="/SearchPage" component={SearchPage} />
+
+          {/* <Route exact path="/Topic:category" component={Topic} /> */}
+          {/* <Route exact path="/Login" component={Login} /> */}
         </Switch>
       </Router>
     );

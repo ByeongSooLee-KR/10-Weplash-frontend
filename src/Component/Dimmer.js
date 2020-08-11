@@ -9,10 +9,11 @@ const DimmerContainer = styled.div`
   bottom: 0px;
   width: 100vw;
   height: 100vh;
-  z-index: 5;
+  z-index: 16;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.6);
   padding: 35px 6vw 100px;
+  cursor: zoom-out;
 `;
 
 const Dimmer = ({ setCollectionModalActive }) => {

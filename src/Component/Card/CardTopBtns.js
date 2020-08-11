@@ -7,7 +7,11 @@ const {
   colors: { grayColor, redColor },
 } = theme;
 
-const CardTopBtns = ({ img }) => {
+const CardTopBtns = ({
+  img,
+  collectionModalActive,
+  setCollectionModalActive,
+}) => {
   const [like, setLikeBtn] = useState(false);
   const handleLikeBtn = () => {
     setLikeBtn(!like);
@@ -24,6 +28,7 @@ const CardTopBtns = ({ img }) => {
   const [collect, setCollectBtn] = useState(false);
   const handleCollectBtn = () => {
     setCollectBtn(!collect);
+    setCollectionModalActive(!collectionModalActive);
     // fetch(collectAPI, {
     //   method: "POST",
     //   headers: {
@@ -56,8 +61,8 @@ const CardTopBtns = ({ img }) => {
 export default CardTopBtns;
 
 const CardTopBtnsFrame = styled.div`
-  z-index: 3;
   position: absolute;
+  z-index: 10;
   display: flex;
   top: 20px;
   right: 20px;

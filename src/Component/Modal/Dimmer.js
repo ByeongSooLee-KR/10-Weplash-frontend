@@ -2,6 +2,20 @@ import React from "react";
 import styled from "styled-components";
 import BtnClose from "./Buttons/BtnClose";
 
+const Dimmer = ({ setSubmitModalState }) => {
+  const handleCloseModal = () => {
+    setSubmitModalState(false);
+  };
+
+  return (
+    <DimmerContainer onClick={handleCloseModal}>
+      <BtnClose />
+    </DimmerContainer>
+  );
+};
+
+export default Dimmer;
+
 const DimmerContainer = styled.div`
   position: fixed;
   top: 0px;
@@ -15,13 +29,3 @@ const DimmerContainer = styled.div`
   background-color: rgba(0, 0, 0, 0.6);
   padding: 35px 6vw 100px;
 `;
-
-const Dimmer = (props) => {
-  return (
-    <DimmerContainer>
-      <BtnClose />
-    </DimmerContainer>
-  );
-};
-
-export default Dimmer;

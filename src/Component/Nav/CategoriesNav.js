@@ -5,7 +5,7 @@ import { navData } from "./navData";
 
 const Category = ({ category }) => {
   return (
-    <Link to="/">
+    <Link to={`/topic/${category}`}>
       <li>{category}</li>
     </Link>
   );

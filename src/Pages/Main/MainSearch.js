@@ -195,6 +195,6 @@ const FooterBox = styled.div`
   padding: 10px;
   display: flex;
   justify-content: space-between;
-  z-index: 2;
+  z-index: 1;
   cursor: pointer;
 `;

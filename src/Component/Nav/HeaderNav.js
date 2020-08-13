@@ -1,10 +1,15 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { HomeSvg, SearchSvg, DotSvg, AlarmSvg } from "../../Svg/svg";
+import NavUiBeforeLogin from "./NavUiBeforeLogin";
+import NavUiLogin from "./NavUiLogin";
+import { loginAction } from "../../redux/actions";
+import { HomeSvg, SearchSvg, DotSvg } from "../../Svg/svg";
 
-const HeaderNav = ({ setSubmitModalState }) => {
+const HeaderNav = ({ setSubmitModalState, authState, loginAction }) => {
   const [inputBg, setInputBg] = useState(false);
+  const history = useHistory();
 
   return (
     <header>
@@ -39,26 +44,33 @@ const HeaderNav = ({ setSubmitModalState }) => {
         </HomeContainer>
         <BtnContainer>
           <SubmitPhoto>
-            <button onClick={() => setSubmitModalState(true)}>
+            <button
+              onClick={
+                authState
+                  ? () => setSubmitModalState(true)
+                  : () => history.push("/Login")
+              }
+            >
               Submit
               <span> a photo</span>
             </button>
           </SubmitPhoto>
-          <Alarm>
-            <span>
-              <button>{AlarmSvg}</button>
-            </span>
-          </Alarm>
-          <NavUserIcon>
-            <button />
-          </NavUserIcon>
+          {authState ? <NavUiLogin /> : <NavUiBeforeLogin />}
         </BtnContainer>
       </NavContainer>
     </header>
   );
 };
 
-export default HeaderNav;
+//redux
+
+const mapStateToProps = (state) => {
+  return {
+    authState: state.authState,
+  };
+};
+
+export default connect(mapStateToProps, { loginAction })(HeaderNav);
 
 const NavContainer = styled.nav`
   width: 100%;
@@ -154,6 +166,14 @@ const HomeContainer = styled.div`
 const BtnContainer = styled.div`
   display: flex;
   align-items: center;
+
+  .border {
+    background-color: #d1d1d1;
+    width: 1px;
+    height: 32px;
+    margin: 0 12px;
+    flex-shrink: 0;
+  }
 `;
 
 const SubmitPhoto = styled.div`
@@ -170,31 +190,5 @@ const SubmitPhoto = styled.div`
     color: #767676;
     border: 1px solid lightgrey;
     border-radius: 4px;
-  }
-`;
-
-const Alarm = styled.div`
-  height: 48px;
-  margin-left: 9px;
-
-  button {
-    ${(props) => props.theme.btnCustom};
-    padding: 14px;
-    fill: #767676;
-  }
-`;
-
-const NavUserIcon = styled.div`
-  margin-left: 6px;
-
-  button {
-    ${(props) => props.theme.btnCustom};
-    width: 32px;
-    height: 32px;
-    background-color: rgba(0, 0, 0, 0.1);
-    border-radius: 50%;
-    overflow: hidden;
-    background: url("https://images.unsplash.com/placeholder-avatars/extra-large.jpg?dpr=1&auto=format&fit=crop&w=32&h=32&q=60&crop=faces&bg=fff%201x,%20https://images.unsplash.com/placeholder-avatars/extra-large.jpg?dpr=2&auto=format&fit=crop&w=32&h=32&q=60&crop=faces&bg=fff%202x")
-      no-repeat;
   }
 `;

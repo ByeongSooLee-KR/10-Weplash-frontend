@@ -4,13 +4,6 @@ import HeaderNav from "./HeaderNav";
 import CategoriesNav from "./CategoriesNav";
 import Upload from "../../Component/Upload/Upload";
 
-const NavContainer = styled.div`
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 15;
-`;
-
 const Nav = () => {
   const [submitModalState, setSubmitModalState] = useState(false);
 
@@ -24,3 +17,12 @@ const Nav = () => {
 };
 
 export default Nav;
+
+//styled Component
+
+const NavContainer = styled.div`
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+`;

@@ -40,7 +40,7 @@ const UserPage = () => {
   const handleClick = (id) => {
     setActiveTab(id);
   };
-  console.log(userId);
+
   return (
     <>
       <HeaderNav />

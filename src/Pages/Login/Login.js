@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
+import { loginAction } from "../../redux/actions";
 import { Link, useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { signinAPI, signinkakaoAPI, iconKaKao } from "../../config";
 const { Kakao } = window;
 
-const Login = () => {
+const Login = ({ loginAction }) => {
   const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
   const [hasError, setHasError] = useState(false);
@@ -22,7 +24,6 @@ const Login = () => {
         }),
       })
         .then((res) => {
-          console.log(res);
           if (!res.ok) {
             throw new Error();
           }
@@ -30,6 +31,8 @@ const Login = () => {
         })
         .then((res) => {
           if (res.access_token) {
+            console.log(res);
+            loginAction(true);
             sessionStorage.setItem("access_token", res.access_token);
             history.push("/");
           }
@@ -53,9 +56,10 @@ const Login = () => {
           .then((res) => res.json())
           .then((res) => {
             if (res.access_token) {
+              loginAction(true);
               localStorage.setItem("Kakao_token", res.access_token);
               alert("Weplash 에 오신걸 환영합니다!");
-              history.push("/main");
+              history.push("/");
             }
           });
       },
@@ -98,7 +102,7 @@ const Login = () => {
           <StyledLink>Forgot your password</StyledLink>
         </InputUpperText>
         <Input type="password" onChange={(e) => setPassword(e.target.value)} />
-        <LoginButton onChange={handleLogin}>
+        <LoginButton onClick={handleLogin}>
           <p>Login</p>
         </LoginButton>
         <DownText>
@@ -109,7 +113,7 @@ const Login = () => {
     </EntireWrap>
   );
 };
-export default Login;
+export default connect(null, { loginAction })(Login);
 
 const EntireWrap = styled.div`
   width: 100vw;

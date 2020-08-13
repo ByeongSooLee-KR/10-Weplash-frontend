@@ -24,7 +24,6 @@ const AddCollection = ({
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res.data);
         setCollections(res.data);
       });
   };

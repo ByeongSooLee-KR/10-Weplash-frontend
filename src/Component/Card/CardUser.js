@@ -10,7 +10,6 @@ const CardUser = ({ data, userCardState }) => {
   const history = useHistory();
 
   const clickUser = () => {
-    console.log();
     history.push(`/account/@${data.user_name}`);
   };
   //10.58.1.242:8000/photo?user=photos

@@ -36,7 +36,7 @@ const Modal = ({
         setRelatedPhotos(res.data);
       });
 
-    fetch(`${API_URL}/photo/related-collection/22`)
+    fetch(`${API_URL}/photo/related-collection?photo=1`)
       .then((res) => res.json())
       .then((res) => {
         setRelatedCollections(res.data);

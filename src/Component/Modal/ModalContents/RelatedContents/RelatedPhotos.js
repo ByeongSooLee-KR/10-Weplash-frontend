@@ -11,7 +11,6 @@ const RelatedPhotos = ({
   isModalActive,
 }) => {
   const handleMoveToNewCard = (nothing, i) => {
-    console.log("넌 불리고 있니?", nothing, i);
     handleScrollToTop();
     setCardData(relatedPhotos);
     setCardIndex(i);

@@ -14,7 +14,6 @@ const CardTopBtns = ({
   collectionModalActive,
   setCollectionModalActive,
 }) => {
-  console.log("btn에서 찍는 콘솔", data.user_collection);
   const [like, setLikeBtn] = useState(data.user_like);
   const handleLikeBtn = () => {
     fetch(`${TopicCardsAPI}/heart`, {

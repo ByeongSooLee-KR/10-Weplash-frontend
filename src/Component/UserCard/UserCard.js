@@ -6,7 +6,7 @@ const UserCard = ({ show, cardUserImg, cardUserName, cardUserId }) => {
   const [user, setUserCard] = useState([]);
 
   useEffect(() => {
-    fetch(`http://10.58.1.191:8000/photo/user-card/${cardUserId}`)
+    fetch(`http://10.58.1.191:8001/photo/user-card/${cardUserId}`)
       .then((res) => res.json())
       .then((res) => {
         setUserCard(res.data);

@@ -5,7 +5,6 @@ import CardTopBtns from "./CardTopBtns";
 import CardUser from "./CardUser";
 
 const Card = ({ card, color, id, onClickModal, userCardState }) => {
-  console.log("card에서 찍는 콘솔", card);
   const [show, setShow] = useState(false);
 
   const options = { thershold: 1.0 };

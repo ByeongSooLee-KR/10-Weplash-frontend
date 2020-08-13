@@ -10,7 +10,7 @@ const Topic = () => {
   // const { category } = useParams(); merge 후 사용
 
   useEffect(() => {
-    fetch(`${TopicCardsAPI}/collection-main?category=${"Nature"}`)
+    fetch(`${TopicCardsAPI}/main-collection?category=${"Nature"}`)
       .then((res) => res.json())
       .then((res) => {
         setTopic(res.data);
@@ -23,7 +23,7 @@ const Topic = () => {
       <Nav />
       <TopicFrame>
         <TopicInfo data={topic} />
-        <CardList topic={topic} />
+        {topic.length > 0 && <CardList topic={topic} />}
       </TopicFrame>
     </>
   );

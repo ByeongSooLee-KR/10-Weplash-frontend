@@ -6,7 +6,6 @@ import Loading from "../Loading";
 import { TopicCardsAPI, tokentoken } from "../../config";
 
 const CardList = ({ topic }) => {
-  const isLoaded = topic[0] !== undefined;
   const [cards, setCards] = useState([]);
   const [colors, setColors] = useState([]);
   const [offset, setOffset] = useState(0);
@@ -21,6 +20,7 @@ const CardList = ({ topic }) => {
   const LIMIT = 20;
 
   const fetchData = (api, data, setData) => {
+    console.log("fetchData");
     fetch(`${TopicCardsAPI}${api}offset=${offset}&limit=${LIMIT}`, {
       headers: {
         // Authorization: localStorage.getItem("access_token"),
@@ -35,11 +35,9 @@ const CardList = ({ topic }) => {
   };
 
   useEffect(() => {
-    if (isLoaded) {
-      fetchData(`/back/${topic[0].collection}?`, colors, setColors);
-      fetchData(`?category=${topic[0].collection}&`, cards, setCards);
-    }
-  }, [isLoaded]);
+    fetchData(`/back/${topic[0].collection}?`, colors, setColors);
+    fetchData(`?category=${topic[0].collection}&`, cards, setCards);
+  }, []);
 
   const checkScrollHeight = () => {
     window.onscroll = function () {
@@ -47,6 +45,7 @@ const CardList = ({ topic }) => {
         window.innerHeight + window.scrollY >=
         document.body.offsetHeight - 100
       ) {
+        console.log("offset", offset);
         setOffset(offset + 1);
         setLoading(true);
         handleScroll(offset + 1);
@@ -60,6 +59,7 @@ const CardList = ({ topic }) => {
   });
 
   const handleScroll = (next) => {
+    console.log("handleScroll");
     if (next !== prevOffset.current) {
       fetchData(`/back/${topic[0].collection}?`, colors, setColors);
       fetchData(`?category=${topic[0].collection}&`, cards, setCards);

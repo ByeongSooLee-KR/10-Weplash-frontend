@@ -58,6 +58,7 @@ const TopicInfoFrame = styled.div`
   width: 1320px;
   padding: 60px 12px 72px;
   margin: 0 auto;
+  margin-top: 100px;
 
   section {
     h1 {

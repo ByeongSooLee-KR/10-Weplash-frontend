@@ -13,7 +13,6 @@ const Main = () => {
   const handleModal = (idx) => {
     setModalActive(!isModalActive);
     setCardIndex(idx);
-    // isModalActive && setCardData(originCardData);
   };
 
   const handleIndex = (newIdx) => {

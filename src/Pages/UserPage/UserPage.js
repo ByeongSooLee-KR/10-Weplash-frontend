@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Photos from "./Components/Photos";
 import Likes from "./Components/Likes";
@@ -7,7 +7,13 @@ import Collections from "./Components/Collections";
 import UserProfile from "./Components/UserProfile";
 import MyProfile from "./Components/MyProfile";
 import HeaderNav from "../../Component/Nav/HeaderNav";
-import { iconPhoto, iconLike, iconCollection, iconStat } from "../../config";
+import {
+  iconPhoto,
+  iconLike,
+  iconCollection,
+  iconStat,
+  userPageAPI,
+} from "../../config";
 
 const obj = {
   0: <Photos />,
@@ -19,9 +25,11 @@ const UserPage = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [userData, setUserData] = useState([]);
   const [userValidate, setUserValidate] = useState(false);
+  const history = useHistory();
+  const userId = history.location.pathname.slice(10);
 
   useEffect(() => {
-    fetch("/Data/userData.json")
+    fetch(`${userPageAPI}`)
       .then((res) => res.json())
       .then((res) => {
         setUserData(res.data);
@@ -32,7 +40,7 @@ const UserPage = () => {
   const handleClick = (id) => {
     setActiveTab(id);
   };
-
+  console.log(userId);
   return (
     <>
       <HeaderNav />

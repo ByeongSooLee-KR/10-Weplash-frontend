@@ -55,7 +55,7 @@ const Login = () => {
             if (res.access_token) {
               localStorage.setItem("Kakao_token", res.access_token);
               alert("Weplash 에 오신걸 환영합니다!");
-              history.push("/");
+              history.push("/main");
             }
           });
       },
@@ -172,7 +172,7 @@ const KaKaoBtn = styled.button`
   padding: 0;
   line-height: 44px;
   color: #783c00;
-  background-color: #ffeb00;
+  background-color: rgb(248, 248, 249);
   border: 1px solid transparent;
   border-radius: 3px;
   font-size: 14px;
@@ -186,6 +186,7 @@ const KaKaoBtn = styled.button`
     width: 24px;
     height: 24px;
     margin-right: 5px;
+    fill: #783c00;
   }
 `;
 

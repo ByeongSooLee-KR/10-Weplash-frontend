@@ -1,4 +1,6 @@
-export const TopicCardsAPI = "http://10.58.1.242:8000/photo";
+import React from "react";
+
+export const TopicCardsAPI = "http://10.58.1.191:8000/photo";
 export const iconPhoto =
   "M12,0C5.373,0,0,4.238,0,9.465c0,3.403,2.277,6.386,5.693,8.054 c-0.251,0.935-0.909,3.387-1.04,3.912c-0.163,0.65,0.239,0.643,0.502,0.4M10.8 18.2667L14.5333 22.6667L19.7333 16L26.4 24.9333H5.6L10.8 18.2667ZM29.3333 28V4C29.3333 3.2 28.8 2.66667 28 2.66667H4C3.2 2.66667 2.66667 3.2 2.66667 4V28C2.66667 28.8 3.2 29.3333 4 29.3333H28C28.8 29.3333 29.3333 28.8 29.3333 28Z67c0.206-0.138,3.288-2.229,4.618-3.13 c0.722,0.106,1.466,0.163,2.227,0.163c6.627,0,12-4.238,12-9.466C24,4.238,18.627,0,12,0";
 export const iconLike =
@@ -11,9 +13,67 @@ export const iconFooter =
   "M 10 9 V 0 h 12 v 9 H 10 Z m 12 5 h 10 v 18 H 0 V 14 h 10 v 9 h 12 v -9 Z";
 export const iconFollow =
   "M31.2 12.8h-2.4v-2.4c0-.4-.4-.8-.8-.8h-1.6c-.4 0-.8.4-.8.8v2.4h-2.4c-.4 0-.8.4-.8.8v1.6c0 .4.4.8.8.8h2.4v2.4c0 .4.4.8.8.8h1.6c.4 0 .8-.4.8-.8v-2.4h2.4c.4 0 .8-.4.8-.8v-1.6c0-.4-.4-.8-.8-.8zm-15.2 5.1v-1.2c1.9-1.1 3.2-3.1 3.2-5.5v-1.6c0-3.5-2.9-6.4-6.4-6.4s-6.4 2.9-6.4 6.4v1.6c0 2.4 1.3 4.4 3.2 5.5v1.2c-5.5.9-9.6 4-9.6 7.7v1.6c0 .9.7 1.6 1.6 1.6h22.4c.9 0 1.6-.7 1.6-1.6v-1.6c0-3.7-4.1-6.8-9.6-7.7z";
+
+export const likeBtnSvg = (
+  <svg version="1.1" viewBox="0 0 32 32" aria-hidden="false">
+    <path d="M17.4 29c-.8.8-2 .8-2.8 0l-12.3-12.8c-3.1-3.1-3.1-8.2 0-11.4 3.1-3.1 8.2-3.1 11.3 0l2.4 2.8 2.3-2.8c3.1-3.1 8.2-3.1 11.3 0 3.1 3.1 3.1 8.2 0 11.4l-12.2 12.8z"></path>
+  </svg>
+);
+
+export const collectBtnSvg = (
+  <svg version="1.1" viewBox="0 0 32 32" aria-hidden="false">
+    <path d="M14 3h4v26h-4zM29 14v4h-26v-4z"></path>
+  </svg>
+);
+
+export const downloadBtnSvg = (
+  <svg version="1.1" viewBox="0 0 32 32" aria-hidden="false">
+    <path d="M25.8 15.5l-7.8 7.2v-20.7h-4v20.7l-7.8-7.2-2.7 3 12.5 11.4 12.5-11.4z"></path>
+  </svg>
+);
+
+export const statusSvg = (
+  <svg version="1.1" viewBox="0 0 32 32" aria-hidden="false">
+    <path d="M16 2.7C8.7 2.7 2.7 8.7 2.7 16s6 13.3 13.3 13.3 13.3-6 13.3-13.3S23.3 2.7 16 2.7zm-.7 24v-8.3h-4.6l6.7-13v8.3h4.5l-6.6 13z"></path>
+  </svg>
+);
+
+export const contributionsSvg = (
+  <svg version="1.1" viewBox="0 0 32 32" aria-hidden="false">
+    <path d="M10.81 18.22l3.71 4.45L19.7 16l6.67 8.89H5.63zM29.33 28V4A1.32 1.32 0 0028 2.67H4A1.32 1.32 0 002.67 4v24A1.32 1.32 0 004 29.33h24A1.32 1.32 0 0029.33 28z"></path>
+  </svg>
+);
+
+export const topConributorsSvg = (
+  <svg version="1.1" viewBox="0 0 32 32" aria-hidden="false">
+    <path d="M30.67 22.67v4h-5.34v-4a6.21 6.21 0 00-3.1-5.16c3.68.49 8.44 2.25 8.44 5.16zM12 16a5.34 5.34 0 10-5.33-5.33A5.33 5.33 0 0012 16zm8 0a5.34 5.34 0 000-10.67 5.72 5.72 0 00-1.77.32 8 8 0 010 10A5.44 5.44 0 0020 16zm-8 1.33c-3.56 0-10.67 1.79-10.67 5.34v4h21.34v-4c0-3.55-7.11-5.34-10.67-5.34z"></path>
+  </svg>
+);
+
+export const followBtnSvg = (
+  <svg version="1.1" viewBox="0 0 32 32" aria-hidden="false">
+    <path d="M31.2 12.8h-2.4v-2.4c0-.4-.4-.8-.8-.8h-1.6c-.4 0-.8.4-.8.8v2.4h-2.4c-.4 0-.8.4-.8.8v1.6c0 .4.4.8.8.8h2.4v2.4c0 .4.4.8.8.8h1.6c.4 0 .8-.4.8-.8v-2.4h2.4c.4 0 .8-.4.8-.8v-1.6c0-.4-.4-.8-.8-.8zm-15.2 5.1v-1.2c1.9-1.1 3.2-3.1 3.2-5.5v-1.6c0-3.5-2.9-6.4-6.4-6.4s-6.4 2.9-6.4 6.4v1.6c0 2.4 1.3 4.4 3.2 5.5v1.2c-5.5.9-9.6 4-9.6 7.7v1.6c0 .9.7 1.6 1.6 1.6h22.4c.9 0 1.6-.7 1.6-1.6v-1.6c0-3.7-4.1-6.8-9.6-7.7z"></path>
+  </svg>
+);
+
+export const searchBtnSvg = (
+  <svg
+    width="32"
+    height="32"
+    class="_2-tlh _1azRR _1mPD6"
+    version="1.1"
+    viewBox="0 0 32 32"
+    aria-hidden="false"
+  >
+    <path d="M31 28.64l-7.57-7.57a12.53 12.53 0 1 0-2.36 2.36l7.57 7.57zm-17.5-6a9.17 9.17 0 1 1 6.5-2.64 9.11 9.11 0 0 1-6.5 2.67z"></path>
+  </svg>
+);
+export const iconFaceBook =
+  "M21 12.1c0-5-4-9-9-9s-9 4-9 9c0 4.5 3.3 8.2 7.6 8.9v-6.3H8.3v-2.6h2.3v-2c0-2.2 1.4-3.5 3.4-3.5 1 0 2 .2 2 .2V9h-1c-1.1 0-1.4.7-1.4 1.4v1.7H16l-.4 2.6h-2.1V21c4.2-.7 7.5-4.4 7.5-8.9";
 export const iconKaKao =
   "M12 4c-4.97 0-9 3.185-9 7.115 0 2.557 1.707 4.8 4.27 6.054-.188.702-.682 2.545-.78 2.94-.123.49.178.483.376.351.155-.103 2.466-1.675 3.464-2.353.541.08 1.1.123 1.67.123 4.97 0 9-3.186 9-7.115C21 7.185 16.97 4 12 4";
 export const signupAPI = "http://10.58.7.113:8000/account/sign-up";
 export const signinAPI = "http://10.58.7.113:8000/account/sign-in";
 export const signinkakaoAPI = "http://10.58.1.242:8001/account/kakao";
 export const mainsearchAPI = "http://10.58.1.191:8000/photo/search";
+export const userPageAPI = "http://10.58.1.242:8001/photo?user=username";

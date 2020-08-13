@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import CollectionCards from "./CollectionCards";
-import { TopicCardsAPI, tokentoken } from "../../config";
+import { TopicCardsAPI } from "../../config";
 
 const AddCollection = ({
   setCreateModal,
@@ -14,8 +14,7 @@ const AddCollection = ({
     fetch(`${TopicCardsAPI}/add`, {
       method: "POST",
       headers: {
-        // Authorization: localStorage.getItem("access_token"),
-        Authorization: tokentoken,
+        Authorization: sessionStorage.getItem("access_token"),
       },
       body: JSON.stringify({
         photo_id: data.id,

@@ -24,7 +24,7 @@ const UploadModal = ({ setSubmitModalState }) => {
     fetch("http://10.58.1.191:8000/photo/upload", {
       method: "POST",
       headers: {
-        Authorization: localStorage.getItem("access_token"),
+        Authorization: sessionStorage.getItem("access_token"),
       },
       body: formData,
     }).then((res) => {

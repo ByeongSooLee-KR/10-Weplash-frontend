@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { TopicCardsAPI, tokentoken } from "../../config";
+import { TopicCardsAPI } from "../../config";
 import AddCollection from "./AddCollection";
 import CreateModal from "./CreateModal";
 import styled from "styled-components";
@@ -16,8 +16,7 @@ const CollectionModal = ({ data, setCollectionModalActive }) => {
     fetch(`${TopicCardsAPI}/${data.id}`, {
       method: "GET",
       headers: {
-        // Authorization: localStorage.getItem("access_token"),
-        Authorization: tokentoken,
+        Authorization: sessionStorage.getItem("access_token"),
       },
     })
       .then((res) => res.json())
@@ -32,8 +31,7 @@ const CollectionModal = ({ data, setCollectionModalActive }) => {
     fetch(`${TopicCardsAPI}/create`, {
       method: "POST",
       headers: {
-        // Authorization: localStorage.getItem("access_token"),
-        Authorization: tokentoken,
+        Authorization: sessionStorage.getItem("access_token"),
       },
       body: JSON.stringify({
         photo_id: data.id,

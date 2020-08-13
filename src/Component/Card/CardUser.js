@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link, withRouter, useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { downloadBtnSvg } from "../../icons";
 import UserCard from "../UserCard/UserCard";
+import { downloadBtnSvg } from "../../icons";
 import theme from "../../Styles/StyleTheme";
 
 const CardUser = ({ data, userCardState }) => {
@@ -52,20 +52,20 @@ const {
 const CardUserFrame = styled.div`
   position: absolute;
   bottom: 0px;
-  z-index: 10;
   display: flex;
-  width: 100%;
   align-items: flex-end;
+  width: 100%;
   padding: 20px;
+  z-index: 10;
 
   .mouseOver {
-    z-index: 50;
     width: 90%;
+    z-index: 50;
 
     .userTag {
       display: flex;
-      margin-top: 20px;
       align-items: center;
+      margin-top: 20px;
       cursor: pointer;
 
       .userImg {

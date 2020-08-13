@@ -6,9 +6,7 @@ import UserPage from "./Pages/UserPage/UserPage";
 import Login from "./Pages/Login/Login";
 import MainPage from "./Pages/Main/MainPage";
 import SignUp from "./Pages/SignUp/SignUp";
-import MainSearch from "./Pages/Main/MainSearch";
-
-// import SearchPage from "./Pages/SearchPage/SearchPage";
+import SearchPage from "./Pages/SearchPage/SearchPage";
 
 class Routes extends React.Component {
   render() {
@@ -22,7 +20,11 @@ class Routes extends React.Component {
           <Route exact path="/CardList" component={Topic} />
           <Route exact path="/SignUp:id" component={SignUp} />
           <Route exact path="/account/:id/" component={UserPage} />
-          {/* <Route exact path="/photo?search=/:id" component={SearchPage} /> */}
+          <Route exact path="/photo?search=/:id" component={SearchPage} />
+          <Route exact path="/SearchPage" component={SearchPage} />
+
+          {/* <Route exact path="/Topic:category" component={Topic} /> */}
+          {/* <Route exact path="/Login" component={Login} /> */}
         </Switch>
       </Router>
     );

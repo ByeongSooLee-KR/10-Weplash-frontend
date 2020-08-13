@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import CollectionModal from "../Collection/CollectionModal";
 import CardTopBtns from "./CardTopBtns";
 import CardUser from "./CardUser";
-import CollectionModal from "../Collection/CollectionModal";
 
 const Card = ({ card, color, id, onClickModal, userCardState }) => {
+  console.log("card에서 찍는 콘솔", card);
   const [show, setShow] = useState(false);
 
   const options = { thershold: 1.0 };
@@ -23,27 +24,30 @@ const Card = ({ card, color, id, onClickModal, userCardState }) => {
   const [collectionModalActive, setCollectionModalActive] = useState(false);
 
   return (
-    // <CardFrame color={color[id]}>
     <CardFrame>
       <div
         onMouseEnter={() => setShow(true)}
         onMouseLeave={() => setShow(false)}
       >
-        {show && (
-          <CardTopBtns
-            data={card}
-            img={card.image}
-            id={id}
-            setCollectionModalActive={setCollectionModalActive}
-            collectionModalActive={collectionModalActive}
-          />
-        )}
+        <CardTopBtns
+          data={card}
+          id={id}
+          show={show}
+          setCollectionModalActive={setCollectionModalActive}
+          collectionModalActive={collectionModalActive}
+        />
         {show && <CardUser data={card} userCardState={userCardState} />}
         {show && <HoverStyle onClick={() => onClickModal(card.id, id)} />}
-        <img alt="" className="imageCard" src={card.image} color={color} />
+        <img
+          alt="ImageCard"
+          className="imageCard"
+          src={card.image}
+          color={color}
+        />
       </div>
       {collectionModalActive && (
         <CollectionModal
+          data={card}
           collectionModalActive={collectionModalActive}
           setCollectionModalActive={setCollectionModalActive}
         />
@@ -60,13 +64,14 @@ const HoverStyle = styled.div`
   display: flex;
   justify-content: space-between;
   align-self: flex-start;
-  margin: 0;
-  padding: 0;
   width: 100%;
   height: 100%;
+  margin: 0;
+  padding: 0;
   background-color: rgba(0, 0, 0, 0.3);
   transition: 0.2s;
 `;
+
 const CardFrame = styled.figure`
   position: relative;
   display: inline-block;
@@ -76,7 +81,6 @@ const CardFrame = styled.figure`
   cursor: zoom-in;
 
   .imageCard {
-    /* display: block; */
     width: 100%;
     height: ${(props) => `${props.height}px`};
     background-color: ${(props) => props.color};

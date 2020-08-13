@@ -31,7 +31,6 @@ const Login = ({ loginAction }) => {
         })
         .then((res) => {
           if (res.access_token) {
-            console.log(res);
             loginAction(true);
             sessionStorage.setItem("access_token", res.access_token);
             history.push("/");

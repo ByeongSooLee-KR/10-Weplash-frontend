@@ -12,6 +12,7 @@ const ModalContent = ({
   cardIndex,
   setCardData,
   relatedTags,
+  relatedPhotosColor,
   relatedPhotos,
   relatedCollections,
   setCardIndex,
@@ -58,7 +59,7 @@ const ModalContent = ({
                     </div>
                   </span>
                 </Left>
-                <Buttons />
+                <Buttons cardData={cardData[cardIndex]} />
               </header>
             </HeaderContainer>
             <ImgContainer isImgFull={isImgFull}>
@@ -103,9 +104,9 @@ const ModalContent = ({
             <Share></Share>
             <InfoIcon></InfoIcon>
           </Bottom>
-
           <RelatedContents
             relatedTags={relatedTags}
+            relatedPhotosColor={relatedPhotosColor}
             relatedPhotos={relatedPhotos}
             relatedCollections={relatedCollections}
             setCardData={setCardData}

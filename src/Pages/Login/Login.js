@@ -25,15 +25,15 @@ const Login = ({ loginAction }) => {
       })
         .then((res) => {
           if (!res.ok) {
+            alert("이메일과 비밀번호를 확인해주세요.");
             throw new Error();
           }
           return res.json();
         })
         .then((res) => {
           if (res.access_token) {
-            console.log(res);
-            loginAction(true);
-            sessionStorage.setItem("access_token", res.access_token);
+            localStorage.setItem("access_token", res.access_token);
+            loginAction(localStorage.getItem("access_token"));
             history.push("/");
           }
         })
@@ -56,8 +56,8 @@ const Login = ({ loginAction }) => {
           .then((res) => res.json())
           .then((res) => {
             if (res.access_token) {
-              loginAction(true);
               localStorage.setItem("Kakao_token", res.access_token);
+              loginAction(localStorage.getItem("access_token"));
               alert("Weplash 에 오신걸 환영합니다!");
               history.push("/");
             }

@@ -1,4 +1,4 @@
-const INITIAL_STATE = false;
+const INITIAL_STATE = localStorage.getItem("access_token") || "";
 
 const authState = (state = INITIAL_STATE, action) => {
   switch (action.type) {

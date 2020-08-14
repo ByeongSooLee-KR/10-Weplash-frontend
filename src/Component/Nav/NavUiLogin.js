@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { loginAction } from "../../redux/actions";
 import { AlarmSvg } from "../../Svg/svg";
 
 const NavUiLogin = ({ loginAction }) => {
   const [dropDownOpen, setDropDownOpen] = useState(false);
+  const history = useHistory();
 
   return (
     <>
@@ -28,7 +29,9 @@ const NavUiLogin = ({ loginAction }) => {
                 <li
                   onBlur={() => setDropDownOpen(!dropDownOpen)}
                   onClick={() => {
-                    loginAction(false);
+                    localStorage.removeItem("access_token");
+                    loginAction("");
+                    history.push("/Login");
                   }}
                 >
                   Logout

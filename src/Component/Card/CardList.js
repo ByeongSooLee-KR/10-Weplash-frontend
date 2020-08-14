@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Card from "./Card";
 import Modal from "../Modal/Modal";
 import Loading from "../Loading";
-import { TopicCardsAPI, tokentoken } from "../../config";
+import { TopicCardsAPI } from "../../config";
 
 const CardList = ({ topic }) => {
   const [cards, setCards] = useState([]);
@@ -19,33 +19,34 @@ const CardList = ({ topic }) => {
   const prevOffset = useRef(0);
   const LIMIT = 20;
 
-  const fetchData = (api, data, setData) => {
-    console.log("fetchData");
-    fetch(`${TopicCardsAPI}${api}offset=${offset}&limit=${LIMIT}`, {
-      headers: {
-        // Authorization: localStorage.getItem("access_token"),
-        Authorization: tokentoken,
-      },
-    })
+  const accessToken = localStorage.getItem("access_token");
+  const fetchData = (api, setData, data) => {
+    setLoading(true);
+    fetch(
+      `${TopicCardsAPI}${api}offset=${offset}&limit=${LIMIT}`,
+      accessToken && {
+        headers: {
+          Authorization: accessToken,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((res) => {
-        setData([...data, ...res.data]);
+        data ? setData([...data, ...res.data]) : setData([...res.data]);
         setLoading(false);
       });
   };
 
   useEffect(() => {
-    fetchData(`/back/${topic[0].collection}?`, colors, setColors);
-    fetchData(`?category=${topic[0].collection}&`, cards, setCards);
-  }, []);
-
+    fetchData(`/back?category=${topic[0].collection}&`, setColors, colors);
+    fetchData(`?category=${topic[0].collection}&`, setCards);
+  }, [topic]);
   const checkScrollHeight = () => {
     window.onscroll = function () {
       if (
         window.innerHeight + window.scrollY >=
         document.body.offsetHeight - 100
       ) {
-        console.log("offset", offset);
         setOffset(offset + 1);
         setLoading(true);
         handleScroll(offset + 1);
@@ -59,10 +60,9 @@ const CardList = ({ topic }) => {
   });
 
   const handleScroll = (next) => {
-    console.log("handleScroll");
     if (next !== prevOffset.current) {
-      fetchData(`/back/${topic[0].collection}?`, colors, setColors);
-      fetchData(`?category=${topic[0].collection}&`, cards, setCards);
+      fetchData(`/back/${topic[0].collection}?`, setColors, colors);
+      fetchData(`?category=${topic[0].collection}&`, setCards, cards);
       prevOffset.current += 1;
     }
   };

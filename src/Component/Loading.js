@@ -39,7 +39,7 @@ const LoadingFrame = styled.div`
     top: 10px;
     left: 10px;
     border-radius: 50%;
-    box-shadow: 0 4.8px 0 0 #fff;
+    box-shadow: 0 4.8px 0 0 #ddd;
     transform-origin: 40px 42.4px;
   }
 

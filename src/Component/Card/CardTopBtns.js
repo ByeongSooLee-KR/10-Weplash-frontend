@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { likeBtnSvg, collectBtnSvg } from "../../icons";
-import { TopicCardsAPI, tokentoken } from "../../config";
+import { TopicCardsAPI } from "../../config";
 import theme from "../../Styles/StyleTheme";
 
 const {
@@ -19,14 +19,14 @@ const CardTopBtns = ({
     fetch(`${TopicCardsAPI}/heart`, {
       method: "PATCH",
       headers: {
-        Authorization: tokentoken,
+        Authorization: localStorage.getItem("access_token"),
       },
       body: JSON.stringify({
         photo_id: data.id,
       }),
     })
       .then((res) => res.json())
-      .then((res) => setLikeBtn(res.user_like));
+      .then((res) => setLikeBtn(res.status));
   };
 
   const [collect, setCollectBtn] = useState(data.user_collection);
@@ -54,7 +54,7 @@ const CardTopBtnsFrame = styled.div`
   top: 20px;
   right: 20px;
   display: ${({ show }) => (show ? "flex" : "none")};
-  z-index: 10;
+  z-index: 1;
 `;
 
 const Buttons = styled.button`

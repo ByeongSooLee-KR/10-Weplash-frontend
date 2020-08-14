@@ -1,12 +1,24 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { followBtnSvg } from "../../icons";
+import { TopicCardsAPI, MinhoAPI } from "../../config";
 
-const UserCard = ({ show, cardUserImg, cardUserName, cardUserId }) => {
+const UserCard = ({
+  show,
+  cardUserImg,
+  cardUserName,
+  cardUserId,
+  data,
+  isModalActive,
+}) => {
   const [user, setUserCard] = useState([]);
-
+  const [followStatus, setFollowStatus] = useState(data.follow);
   useEffect(() => {
-    fetch(`http://10.58.1.191:8001/photo/user-card/${cardUserId}`)
+    fetch(`${TopicCardsAPI}/user-card/${cardUserId}`, {
+      headers: {
+        Authorization: localStorage.getItem("access_token"),
+      },
+    })
       .then((res) => res.json())
       .then((res) => {
         setUserCard(res.data);
@@ -14,9 +26,26 @@ const UserCard = ({ show, cardUserImg, cardUserName, cardUserId }) => {
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const clickFollow = () => {
+    fetch(`${MinhoAPI}/account/following`, {
+      method: "POST",
+      headers: {
+        Authorization: localStorage.getItem("access_token"),
+      },
+      body: JSON.stringify({
+        user_id: user.id,
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setFollowStatus(res.status);
+      });
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  };
+
   const photos = user.photos;
   return (
-    <UserCardFrame show={show}>
+    <UserCardFrame show={show} isModalActive={isModalActive}>
       <UserAccount>
         <img className="userProfile" alt="userProfileImg" src={cardUserImg} />
         <div>
@@ -30,21 +59,21 @@ const UserCard = ({ show, cardUserImg, cardUserName, cardUserId }) => {
             return <FeatureImg key={idx} img={`url("${item}")`} />;
           })}
       </UserUploadImg>
-      {user.follow === "self" && (
+      {user.follow === "self" ? (
         <ViewProfileButton>
           <p>ViewProfile</p>
         </ViewProfileButton>
-      )}
-      {user.follow ? (
+      ) : followStatus ? (
         <FollowingButton>
           <p>Following</p>
         </FollowingButton>
       ) : (
-        <FollowButton>
+        <FollowButton onClick={clickFollow}>
           {followBtnSvg}
           <p>Follow</p>
         </FollowButton>
       )}
+
       <UserCardArrow />
     </UserCardFrame>
   );
@@ -53,6 +82,7 @@ const UserCard = ({ show, cardUserImg, cardUserName, cardUserId }) => {
 export default UserCard;
 
 const UserCardFrame = styled.div`
+  display: ${({ show }) => (show ? "inline-block" : "none")};
   width: 100%;
   height: 251px;
   padding: 16px;
@@ -128,7 +158,7 @@ const ViewProfileButton = styled.button`
 const FollowingButton = styled.button`
   width: 100%;
   padding: 11px;
-  color: white;
+  color: #d1d1d1;
   border-radius: 4px;
   border: 1px solid #d1d1d1;
   background-color: white;

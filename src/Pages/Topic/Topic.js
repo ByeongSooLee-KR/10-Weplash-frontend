@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useParams } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Nav from "../../Component/Nav/Nav";
 import TopicInfo from "../../Component/TopicInfo";
@@ -7,16 +8,16 @@ import { TopicCardsAPI } from "../../config";
 
 const Topic = () => {
   const [topic, setTopic] = useState([]);
-  // const { category } = useParams(); merge 후 사용
+  const { category } = useParams();
 
   useEffect(() => {
-    fetch(`${TopicCardsAPI}/main-collection?category=${"Nature"}`)
+    fetch(`${TopicCardsAPI}/main-collection?category=${category}`)
       .then((res) => res.json())
       .then((res) => {
         setTopic(res.data);
       });
     //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [category]);
 
   return (
     <>

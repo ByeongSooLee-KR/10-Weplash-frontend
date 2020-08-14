@@ -8,13 +8,11 @@ import theme from "../../Styles/StyleTheme";
 const CardUser = ({ data, userCardState }) => {
   const [show, setShow] = useState(false);
   const history = useHistory();
-
   const clickUser = () => {
     history.push(`/account/@${data.user_name}`);
   };
-  //10.58.1.242:8000/photo?user=photos
 
-  http: return (
+  return (
     <CardUserFrame>
       <div
         className="mouseOver"
@@ -23,10 +21,12 @@ const CardUser = ({ data, userCardState }) => {
       >
         {show && userCardState && (
           <UserCard
+            data={data}
             cardUserId={data.user_name}
             cardUserName={data.user_first_name + data.user_last_name}
             cardUserImg={data.user_profile_image}
             show={show}
+            userCardState={userCardState}
           />
         )}
         <div className="userTag" onClick={clickUser}>

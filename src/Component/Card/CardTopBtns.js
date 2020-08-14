@@ -15,18 +15,21 @@ const CardTopBtns = ({
   setCollectionModalActive,
 }) => {
   const [like, setLikeBtn] = useState(data.user_like);
+  const accessToken = localStorage.getItem("access_token");
   const handleLikeBtn = () => {
-    fetch(`${TopicCardsAPI}/photo/heart`, {
-      method: "PATCH",
-      headers: {
-        Authorization: localStorage.getItem("access_token"),
-      },
-      body: JSON.stringify({
-        photo_id: data.id,
-      }),
-    })
-      .then((res) => res.json())
-      .then((res) => setLikeBtn(res.user_like));
+    accessToken
+      ? fetch(`${TopicCardsAPI}/photo/heart`, {
+          method: "PATCH",
+          headers: {
+            Authorization: localStorage.getItem("access_token"),
+          },
+          body: JSON.stringify({
+            photo_id: data.id,
+          }),
+        })
+          .then((res) => res.json())
+          .then((res) => setLikeBtn(res.user_like))
+      : alert("로그인 먼저 해주세요");
   };
 
   const [collect, setCollectBtn] = useState(data.user_collection);

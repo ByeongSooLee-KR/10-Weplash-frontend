@@ -59,6 +59,8 @@ const Container = styled.div`
   .imageWrap {
     border-radius: 4px;
     overflow: hidden;
+    margin-right: 10px;
+    overflow: hidden;
 
     .imageBox {
       width: 416px;

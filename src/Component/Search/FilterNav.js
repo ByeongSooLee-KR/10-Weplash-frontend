@@ -51,7 +51,7 @@ const FilterNav = (props) => {
 
   useEffect(() => {
     fetch(
-      `${TopicCardsAPI}?search=${params.id}&offset=${offset}&limit=${LIMIT}`
+      `${TopicCardsAPI}/photo?search=${params.id}&offset=${offset}&limit=${LIMIT}`
     )
       .then((res) => res.json())
       .then((res) => {
@@ -61,7 +61,7 @@ const FilterNav = (props) => {
 
   useEffect(() => {
     fetch(
-      `${TopicCardsAPI}?search=${params.id}&offset=${offset}&limit=${LIMIT}`
+      `${TopicCardsAPI}/photo?search=${params.id}&offset=${offset}&limit=${LIMIT}`
     )
       .then((res) => res.json())
       .then((res) => {

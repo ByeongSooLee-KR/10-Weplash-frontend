@@ -1,16 +1,31 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useParams, withRouter, useHistory } from "react-router-dom";
 
-const SearchText = () => {
+const SearchText = (props) => {
+  const history = useHistory();
+
+  const clickTag = (e) => {
+    props.history.push(`/photo/${e.target.innerText}`);
+  };
+
+  // useEffect(() => {
+  //   fetch(`${searchPageTagAPI}${props.tag}`)
+  //     .then((res) => res.json())
+  //     .then((res) => {
+  //       console.log(res)
+  //     });
+  // }, []); 추후 다시 올릴 예정입니다
+
   return (
     <SearchTextWrap>
-      <SearchTitle>Title</SearchTitle>
-      <SearchHashs>Wildlife</SearchHashs>
+      <SearchTitle>{props.tag}</SearchTitle>
+      <SearchHashs onClick={clickTag}>dog</SearchHashs>
     </SearchTextWrap>
   );
 };
 
-export default SearchText;
+export default withRouter(SearchText);
 
 const SearchTextWrap = styled.div`
   padding: 60px 12px 72px;

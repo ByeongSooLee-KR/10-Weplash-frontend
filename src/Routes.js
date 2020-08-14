@@ -14,14 +14,14 @@ class Routes extends React.Component {
       <Router>
         <Switch>
           <Route exact path="/" component={MainPage} />
-          <Route exact path="/topic/:category" component={Topic} />
-          <Route exact path="/UserPage" component={UserPage} />
+          <Route exact path="/Topic/:category" component={Topic} />
           <Route exact path="/Login" component={Login} />
           <Route exact path="/SignUp:id" component={SignUp} />
           <Route exact path="/account/:id/" component={UserPage} />
-          <Route exact path="/photo?search=/:id" component={SearchPage} />
-          <Route exact path="/SearchPage" component={SearchPage} />
-          <Route path="/Following" component={Following} />
+          <Route exact path="/following" component={Following} />
+          <Route exact path="/UserPage/" component={UserPage} />
+          <Route exact path="/following" component={Following} />
+          <Route exact path="/photo/:id" component={SearchPage} />
         </Switch>
       </Router>
     );

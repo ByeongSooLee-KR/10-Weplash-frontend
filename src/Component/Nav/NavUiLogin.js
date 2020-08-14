@@ -23,12 +23,14 @@ const NavUiLogin = ({ loginAction }) => {
             <UserCardArrow />
             <ul>
               <Link to="/UserPage">
+                {/* <Link to =`/account/@${data.user_name}`> */}
                 <li>View profile</li>
               </Link>
               <Link to="/">
                 <li
                   onBlur={() => setDropDownOpen(!dropDownOpen)}
                   onClick={() => {
+                    console.log("click");
                     localStorage.removeItem("access_token");
                     loginAction("");
                     history.push("/Login");

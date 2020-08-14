@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import {
   iconPhoto,
   iconLike,
@@ -13,7 +13,8 @@ import Card from "../Card/Card";
 import Loading from "../Loading";
 import SearchText from "../Search/SearchText";
 
-const FilterNav = () => {
+const FilterNav = (props) => {
+  const history = useHistory();
   const [cards, setCards] = useState([]);
   const [stateFilterSize, setStateFilterSize] = useState(false);
   const [stateFilterColor, setStateFilterColor] = useState(false);
@@ -21,6 +22,7 @@ const FilterNav = () => {
   const [loading, setLoading] = useState(false);
   const [sizeInfo, setSizeInfo] = useState("Any orientation");
   const [sizeData, setSizeData] = useState([]);
+  let params = useParams();
 
   const LIMIT = 20;
 
@@ -49,13 +51,23 @@ const FilterNav = () => {
 
   useEffect(() => {
     fetch(
-      `${TopicCardsAPI}?category=${"Travel"}&offset=${offset}&limit=${LIMIT}`
+      `${TopicCardsAPI}?search=${params.id}&offset=${offset}&limit=${LIMIT}`
     )
       .then((res) => res.json())
       .then((res) => {
         setCards(res.data);
       });
   }, []);
+
+  useEffect(() => {
+    fetch(
+      `${TopicCardsAPI}?search=${params.id}&offset=${offset}&limit=${LIMIT}`
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        setCards(res.data);
+      });
+  }, params.id);
 
   return (
     <>
@@ -146,7 +158,7 @@ const FilterNav = () => {
         </Filters>
       </IconAndFilterBar>
       <SearchResultWrap>
-        <SearchText />
+        <SearchText tag={params.id} />
         <CardListFrame>
           {loading && <Loading load={loading} />}
           {sizeData.length

@@ -21,16 +21,14 @@ const MainSearch = (props) => {
         return data.match(regExp);
       })
       .slice(0, 5);
-    value.length &&
-      keyCode === 13 &&
-      props.history.push("/photo?search=${value}");
+    value.length && keyCode === 13 && props.history.push(`/photo/${value}`);
     setSearchResult(value.length ? filteredTags : []);
     setStateSearchModal(value.length);
     setSearchInput(value);
   };
 
   const clickBtn = () => {
-    searchInput && props.history.push("/photo?search=${searchInput}");
+    searchInput && props.history.push(`/photo/${searchInput}`);
   };
 
   useEffect(() => {

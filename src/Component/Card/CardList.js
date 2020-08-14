@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
+import { TopicCardsAPI } from "../../config";
 import Card from "./Card";
 import Modal from "../Modal/Modal";
 import Loading from "../Loading";
-import { TopicCardsAPI } from "../../config";
 
-const CardList = ({ topic }) => {
+const CardList = ({ userData, topic }) => {
   const [cards, setCards] = useState([]);
   const [colors, setColors] = useState([]);
   const [offset, setOffset] = useState(0);
@@ -35,12 +35,14 @@ const CardList = ({ topic }) => {
         data ? setData([...data, ...res.data]) : setData([...res.data]);
         setLoading(false);
       });
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   };
 
   useEffect(() => {
     fetchData(`/back?category=${topic[0].collection}&`, setColors, colors);
     fetchData(`?category=${topic[0].collection}&`, setCards);
   }, [topic]);
+
   const checkScrollHeight = () => {
     window.onscroll = function () {
       if (
@@ -67,7 +69,6 @@ const CardList = ({ topic }) => {
     }
   };
 
-  //Modal
   const handleModal = (idx) => {
     setModalActive(!isModalActive);
     setCardIndex(idx);
@@ -93,14 +94,30 @@ const CardList = ({ topic }) => {
   useEffect(() => {
     setCardData(cards);
   }, [cards]);
-  /////
 
   return (
     <>
       <CardListFrame>
         {loading && <Loading load={loading} />}
-        {cards &&
+        {!userData &&
+          cards &&
           cards.map((card, id) => {
+            return (
+              <Card
+                key={id}
+                id={id}
+                card={card}
+                color={colors.map((color) => {
+                  return color.background_color;
+                })}
+                onClickModal={handleOpenModal}
+                isModalActive={isModalActive}
+                userCardState={true}
+              />
+            );
+          })}
+        {userData &&
+          userData.map((card, id) => {
             return (
               <Card
                 key={id}
@@ -134,8 +151,8 @@ const CardList = ({ topic }) => {
 export default CardList;
 
 const CardListFrame = styled.div`
-  margin: 0 auto;
   width: 1320px;
+  margin: 0 auto;
   column-width: 416px;
   column-gap: 5px;
 `;

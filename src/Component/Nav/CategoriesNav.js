@@ -19,7 +19,11 @@ const CategoriesNav = () => {
       <Left>
         <ul>
           {editorials.map((category, i) => {
-            return <Category category={category} key={i} />;
+            return (
+              <Link to={`/${category}`}>
+                <li>{category}</li>
+              </Link>
+            );
           })}
         </ul>
       </Left>

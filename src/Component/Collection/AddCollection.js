@@ -11,7 +11,7 @@ const AddCollection = ({
   setCollections,
 }) => {
   const clickAddPhoto = (collection) => {
-    fetch(`${TopicCardsAPI}/add`, {
+    fetch(`${TopicCardsAPI}/photo/add`, {
       method: "POST",
       headers: {
         Authorization: localStorage.getItem("access_token"),

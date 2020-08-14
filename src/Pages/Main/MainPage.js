@@ -8,7 +8,7 @@ import { TopicCardsAPI } from "../../config";
 const MainPage = () => {
   const [main, setMain] = useState([]);
   useEffect(() => {
-    fetch(`${TopicCardsAPI}?category=Photo`)
+    fetch(`${TopicCardsAPI}/photo?category=Photo`)
       .then((res) => res.json())
       .then((res) => {
         setMain(res.data);

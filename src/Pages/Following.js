@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Nav from "../Component/Nav/Nav";
 import Card from "../Component/Card/Card";
@@ -9,7 +8,7 @@ const Following = () => {
   const [following, setFollowing] = useState([]);
 
   useEffect(() => {
-    fetch(`${TopicCardsAPI}?category=Following`, {
+    fetch(`${TopicCardsAPI}/photo?category=Following`, {
       headers: {
         Authorization: localStorage.getItem("access_token"),
       },

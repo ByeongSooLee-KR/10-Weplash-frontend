@@ -16,7 +16,7 @@ const CardTopBtns = ({
 }) => {
   const [like, setLikeBtn] = useState(data.user_like);
   const handleLikeBtn = () => {
-    fetch(`${TopicCardsAPI}/heart`, {
+    fetch(`${TopicCardsAPI}/photo/heart`, {
       method: "PATCH",
       headers: {
         Authorization: localStorage.getItem("access_token"),
@@ -26,7 +26,7 @@ const CardTopBtns = ({
       }),
     })
       .then((res) => res.json())
-      .then((res) => setLikeBtn(res.status));
+      .then((res) => setLikeBtn(res.user_like));
   };
 
   const [collect, setCollectBtn] = useState(data.user_collection);

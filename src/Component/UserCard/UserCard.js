@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { followBtnSvg } from "../../icons";
-import { TopicCardsAPI, MinhoAPI } from "../../config";
+import { TopicCardsAPI } from "../../config";
 
 const UserCard = ({
   show,
@@ -14,7 +14,7 @@ const UserCard = ({
   const [user, setUserCard] = useState([]);
   const [followStatus, setFollowStatus] = useState(data.follow);
   useEffect(() => {
-    fetch(`${TopicCardsAPI}/user-card/${cardUserId}`, {
+    fetch(`${TopicCardsAPI}/photo/user-card/${cardUserId}`, {
       headers: {
         Authorization: localStorage.getItem("access_token"),
       },
@@ -27,7 +27,7 @@ const UserCard = ({
   }, []);
 
   const clickFollow = () => {
-    fetch(`${MinhoAPI}/account/following`, {
+    fetch(`${TopicCardsAPI}/account/following`, {
       method: "POST",
       headers: {
         Authorization: localStorage.getItem("access_token"),

@@ -7,15 +7,9 @@ const RelatedCollections = ({ relatedCollections, userData }) => {
     <Container>
       <Title>Related collections</Title>
       <CollectionsContainer>
-        {/* {!userData &&
-          relatedCollections.map((collection, i) => {
-            return <Collection collection={collection} key={i} />;
-          })} */}
-
-        {userData &&
-          userData.map((collection, i) => {
-            return <Collection collection={collection} key={i} />;
-          })}
+        {relatedCollections.map((collection, i) => {
+          return <Collection collection={collection} key={i} />;
+        })}
       </CollectionsContainer>
     </Container>
   );
@@ -40,4 +34,5 @@ const Title = styled.p`
 
 const CollectionsContainer = styled.div`
   margin: 0 12px 12px 12px;
+  display: flex;
 `;

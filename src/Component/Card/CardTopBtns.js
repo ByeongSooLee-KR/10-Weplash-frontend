@@ -19,14 +19,14 @@ const CardTopBtns = ({
     fetch(`${TopicCardsAPI}/heart`, {
       method: "PATCH",
       headers: {
-        Authorization: sessionStorage.getItem("access_token"),
+        Authorization: localStorage.getItem("access_token"),
       },
       body: JSON.stringify({
         photo_id: data.id,
       }),
     })
       .then((res) => res.json())
-      .then((res) => setLikeBtn(res.user_like));
+      .then((res) => setLikeBtn(res.status));
   };
 
   const [collect, setCollectBtn] = useState(data.user_collection);

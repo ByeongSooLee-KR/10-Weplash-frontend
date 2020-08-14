@@ -16,7 +16,7 @@ const UserCard = ({
   useEffect(() => {
     fetch(`${TopicCardsAPI}/user-card/${cardUserId}`, {
       headers: {
-        Authorization: sessionStorage.getItem("access_token"),
+        Authorization: localStorage.getItem("access_token"),
       },
     })
       .then((res) => res.json())
@@ -30,7 +30,7 @@ const UserCard = ({
     fetch(`${MinhoAPI}/account/following`, {
       method: "POST",
       headers: {
-        Authorization: sessionStorage.getItem("access_token"),
+        Authorization: localStorage.getItem("access_token"),
       },
       body: JSON.stringify({
         user_id: user.id,

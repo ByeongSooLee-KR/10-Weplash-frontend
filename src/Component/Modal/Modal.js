@@ -14,6 +14,7 @@ const Modal = ({
   setCardIndex,
   isModalActive,
 }) => {
+  const [relatedPhotosColor, setRelatedPhotosColor] = useState("#eee");
   const [relatedPhotos, setRelatedPhotos] = useState([]);
   const [relatedTags, setRelatedTags] = useState([]);
   const [relatedCollections, setRelatedCollections] = useState([]);
@@ -28,6 +29,12 @@ const Modal = ({
   const handleRelatedInfo = () => {
     setRelatedPhotos([]);
     handleScrollToTop();
+
+    fetch(`${API_URL}/photo/back/related-photo/${photoId}`)
+      .then((res) => res.json())
+      .then((res) => {
+        setRelatedPhotosColor(res.data.background_color);
+      });
 
     fetch(`${API_URL}/photo/related-photo/${photoId}`)
       .then((res) => res.json())
@@ -59,6 +66,7 @@ const Modal = ({
         cardData={cardData}
         cardIndex={cardIndex}
         setCardData={setCardData}
+        relatedPhotosColor={relatedPhotosColor}
         relatedPhotos={relatedPhotos}
         relatedTags={relatedTags}
         relatedCollections={relatedCollections}
@@ -86,11 +94,3 @@ const Dimmer = styled.div`
   background-color: rgba(0, 0, 0, 0.6);
   padding: 35px 6vw 100px;
 `;
-
-// const Loader = styled.div`
-//   position: fixed;
-//   top: 50%;
-//   left: 50%;
-//   z-index: 0;
-//   display: ${(props) => !props.isLoaderActive && "none"};
-// `;

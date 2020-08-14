@@ -6,7 +6,7 @@ import CollectionModal from "../../Collection/CollectionModal";
 import CardTopBtns from "../../Card/CardTopBtns";
 import DownloadIcon from "./DownloadIcon";
 
-const Buttons = ({ cardData }) => {
+const Buttons = ({ cardData, photoId }) => {
   const [collectionModalActive, setCollectionModalActive] = useState(false);
 
   return (
@@ -14,8 +14,9 @@ const Buttons = ({ cardData }) => {
       {/* <HeartIcon heartState={cardData.user_like} />
       <AddIcon collectionState={cardData.user_collection} /> */}
       <CardTopBtns
-        show={true}
         data={cardData}
+        id={photoId}
+        show={true}
         collectionModalActive={collectionModalActive}
         setCollectionModalActive={setCollectionModalActive}
       />

@@ -23,7 +23,7 @@ const CardList = ({ topic }) => {
   const fetchData = (api, setData, data) => {
     setLoading(true);
     fetch(
-      `${TopicCardsAPI}${api}offset=${offset}&limit=${LIMIT}`,
+      `${TopicCardsAPI}/photo${api}offset=${offset}&limit=${LIMIT}`,
       accessToken && {
         headers: {
           Authorization: accessToken,

@@ -11,7 +11,7 @@ const Topic = () => {
   const { category } = useParams();
 
   useEffect(() => {
-    fetch(`${TopicCardsAPI}/main-collection?category=${category}`)
+    fetch(`${TopicCardsAPI}/photo/main-collection?category=${category}`)
       .then((res) => res.json())
       .then((res) => {
         setTopic(res.data);

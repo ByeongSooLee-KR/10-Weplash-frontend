@@ -63,6 +63,7 @@ const Modal = ({
     <Dimmer onClick={(e) => handleModalClose(e)} ref={scrollToTop}>
       <BtnClose handleModal={handleModal} />
       <ModalContents
+        photoId={photoId}
         cardData={cardData}
         cardIndex={cardIndex}
         setCardData={setCardData}

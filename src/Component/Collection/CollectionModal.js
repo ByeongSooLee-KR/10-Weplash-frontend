@@ -13,7 +13,7 @@ const CollectionModal = ({ data, setCollectionModalActive }) => {
   const [privateStatus, setPrivateStatus] = useState(false);
 
   useEffect(() => {
-    fetch(`${TopicCardsAPI}/${data.id}`, {
+    fetch(`${TopicCardsAPI}/photo/${data.id}`, {
       method: "GET",
       headers: {
         Authorization: localStorage.getItem("access_token"),
@@ -28,7 +28,7 @@ const CollectionModal = ({ data, setCollectionModalActive }) => {
   }, []);
 
   const createCollection = () => {
-    fetch(`${TopicCardsAPI}/create`, {
+    fetch(`${TopicCardsAPI}/photo/create`, {
       method: "POST",
       headers: {
         Authorization: localStorage.getItem("access_token"),

@@ -8,6 +8,7 @@ import RelatedContents from "./RelatedContents/RelatedContents";
 import BtnDirection from "../Buttons/BtnDirection";
 
 const ModalContent = ({
+  photoId,
   cardData,
   cardIndex,
   setCardData,
@@ -59,7 +60,7 @@ const ModalContent = ({
                     </div>
                   </span>
                 </Left>
-                <Buttons cardData={cardData[cardIndex]} />
+                <Buttons cardData={cardData[cardIndex]} photoId={photoId} />
               </header>
             </HeaderContainer>
             <ImgContainer isImgFull={isImgFull}>

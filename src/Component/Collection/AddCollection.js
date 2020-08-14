@@ -14,7 +14,7 @@ const AddCollection = ({
     fetch(`${TopicCardsAPI}/add`, {
       method: "POST",
       headers: {
-        Authorization: sessionStorage.getItem("access_token"),
+        Authorization: localStorage.getItem("access_token"),
       },
       body: JSON.stringify({
         photo_id: data.id,

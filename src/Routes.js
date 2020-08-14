@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Main from "./Pages/Main/Main";
 import Topic from "./Pages/Topic/Topic";
 import Login from "./Pages/Login/Login";
 import MainPage from "./Pages/Main/MainPage";

@@ -5,6 +5,7 @@ import RelatedTags from "./RelatedTags";
 import RelatedPhotos from "./RelatedPhotos";
 
 const RelatedContents = ({
+  relatedPhotosColor,
   relatedPhotos,
   setCardData,
   setCardIndex,
@@ -17,6 +18,7 @@ const RelatedContents = ({
   return (
     <Container>
       <RelatedPhotos
+        relatedPhotosColor={relatedPhotosColor}
         relatedPhotos={relatedPhotos}
         setCardData={setCardData}
         setCardIndex={setCardIndex}

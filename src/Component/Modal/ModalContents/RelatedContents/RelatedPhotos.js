@@ -1,8 +1,9 @@
-import React, { useRef } from "react";
+import React from "react";
 import styled from "styled-components";
 import Card from "../../../Card/Card";
 
 const RelatedPhotos = ({
+  relatedPhotosColor,
   relatedPhotos,
   setCardData,
   setCardIndex,
@@ -16,28 +17,24 @@ const RelatedPhotos = ({
     setCardIndex(i);
   };
 
-  const selectCurrentTarget = useRef();
-
   return (
     <Container>
       <Title>Related Photos</Title>
       <CardWrap>
         {relatedPhotos.map((photo, i) => {
           return (
-            <div className="card" ref={selectCurrentTarget} key={i}>
+            <div className="card" key={i}>
               <Card
                 card={photo}
                 id={i}
                 isModalActive={isModalActive}
                 onClickModal={handleMoveToNewCard}
                 userCardState={false}
+                color={relatedPhotosColor}
               />
             </div>
           );
         })}
-        <Loader id="여기가 로더" isLoaderActive={isLoaderActive}>
-          <div className="ui active inline loader"></div>
-        </Loader>
       </CardWrap>
     </Container>
   );
@@ -64,12 +61,4 @@ const CardWrap = styled.div`
   margin: 0 auto;
   column-width: 416px;
   column-gap: 5px;
-`;
-
-const Loader = styled.div`
-  /* position: fixed;
-  top: 50%;
-  left: 50%; */
-  z-index: 10;
-  display: ${(props) => !props.isLoaderActive && "none"};
 `;

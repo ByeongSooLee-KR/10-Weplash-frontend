@@ -16,7 +16,7 @@ const CollectionModal = ({ data, setCollectionModalActive }) => {
     fetch(`${TopicCardsAPI}/${data.id}`, {
       method: "GET",
       headers: {
-        Authorization: sessionStorage.getItem("access_token"),
+        Authorization: localStorage.getItem("access_token"),
       },
     })
       .then((res) => res.json())
@@ -31,7 +31,7 @@ const CollectionModal = ({ data, setCollectionModalActive }) => {
     fetch(`${TopicCardsAPI}/create`, {
       method: "POST",
       headers: {
-        Authorization: sessionStorage.getItem("access_token"),
+        Authorization: localStorage.getItem("access_token"),
       },
       body: JSON.stringify({
         photo_id: data.id,

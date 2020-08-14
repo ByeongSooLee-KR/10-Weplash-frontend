@@ -1,15 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import Heart from "./HeartIcon";
-import Add from "./AddIcon";
+// import HeartIcon from "./HeartIcon";
+// import AddIcon from "./AddIcon";
+import CollectionModal from "../../Collection/CollectionModal";
+import CardTopBtns from "../../Card/CardTopBtns";
 import DownloadIcon from "./DownloadIcon";
 
-const Buttons = () => {
+const Buttons = ({ cardData }) => {
+  const [collectionModalActive, setCollectionModalActive] = useState(false);
+
   return (
     <Container>
-      <Heart />
-      <Add />
-      <DownloadIcon />
+      {/* <HeartIcon heartState={cardData.user_like} />
+      <AddIcon collectionState={cardData.user_collection} /> */}
+      <CardTopBtns
+        show={true}
+        data={cardData}
+        collectionModalActive={collectionModalActive}
+        setCollectionModalActive={setCollectionModalActive}
+      />
+      {collectionModalActive && (
+        <CollectionModal
+          data={cardData}
+          collectionModalActive={collectionModalActive}
+          setCollectionModalActive={setCollectionModalActive}
+        />
+      )}
+      {/* <DownloadIcon /> */}
     </Container>
   );
 };

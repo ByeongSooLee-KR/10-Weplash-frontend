@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { likeBtnSvg } from "../../../icons";
 
-const HeartIcon = () => {
-  const [likeState, setLikeState] = useState(false);
+const HeartIcon = ({ heartState }) => {
+  const [likeState, setLikeState] = useState(heartState);
+
+  useEffect(() => {
+    setLikeState(heartState);
+  }, [heartState]);
 
   return (
     <Container likeState={likeState}>

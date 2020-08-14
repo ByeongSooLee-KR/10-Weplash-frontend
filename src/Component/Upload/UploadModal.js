@@ -3,12 +3,15 @@ import styled from "styled-components";
 import LoadedImage from "./LoadedImage";
 import LoadingImage from "./LoadingImage";
 import UploadFooter from "./UploadFooter";
+import Loading from "../Loading";
+import API_URL from "../../api";
 
 const UploadModal = ({ setSubmitModalState }) => {
   const [inputImage, setInputImage] = useState(null);
   const [inputLocation, setInputLocation] = useState("Add location");
   const [uploadActivate, setUploadActivate] = useState(false);
   const [uploadSuccess, setUploadSuccess] = useState(false);
+  const [loadingBar, setLoadingBar] = useState(false);
 
   const handleImageInput = (e) => {
     setInputImage(e.target.files[0]);
@@ -16,24 +19,31 @@ const UploadModal = ({ setSubmitModalState }) => {
 
   const handleUpload = (e) => {
     e.preventDefault();
-
-    const formData = new FormData();
-    formData.append("filename", inputImage);
-    formData.append("location", inputLocation);
-
-    fetch("http://10.58.1.191:8000/photo/upload", {
-      method: "POST",
-      headers: {
-        Authorization: sessionStorage.getItem("access_token"),
-      },
-      body: formData,
-    }).then((res) => {
-      res.status === 200 && setUploadSuccess(true);
-      setInputImage(null);
-      setInputLocation(null);
-      setUploadActivate(false);
-    });
+    setLoadingBar(true);
   };
+
+  useEffect(() => {
+    if (loadingBar) {
+      const formData = new FormData();
+      formData.append("filename", inputImage);
+      formData.append("location", inputLocation);
+      formData.append("category", "Travel");
+
+      fetch(`${API_URL}/photo/upload`, {
+        method: "POST",
+        headers: {
+          Authorization: localStorage.getItem("access_token"),
+        },
+        body: formData,
+      }).then((res) => {
+        res.status === 200 && setUploadSuccess(true);
+        setLoadingBar(false);
+        setInputImage(null);
+        setInputLocation(null);
+        setUploadActivate(false);
+      });
+    }
+  }, [loadingBar]);
 
   useEffect(() => {
     if (inputImage && inputLocation !== "Add location") {
@@ -45,6 +55,7 @@ const UploadModal = ({ setSubmitModalState }) => {
   return (
     <Container>
       <div className="wrap">
+        {loadingBar && <Loading />}
         {uploadSuccess && (
           <Uploaded>
             <img src="/Images/upload_success.png" alt="success" />

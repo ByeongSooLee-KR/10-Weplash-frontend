@@ -74,11 +74,11 @@ export const iconFaceBook =
   "M21 12.1c0-5-4-9-9-9s-9 4-9 9c0 4.5 3.3 8.2 7.6 8.9v-6.3H8.3v-2.6h2.3v-2c0-2.2 1.4-3.5 3.4-3.5 1 0 2 .2 2 .2V9h-1c-1.1 0-1.4.7-1.4 1.4v1.7H16l-.4 2.6h-2.1V21c4.2-.7 7.5-4.4 7.5-8.9";
 export const iconKaKao =
   "M12 4c-4.97 0-9 3.185-9 7.115 0 2.557 1.707 4.8 4.27 6.054-.188.702-.682 2.545-.78 2.94-.123.49.178.483.376.351.155-.103 2.466-1.675 3.464-2.353.541.08 1.1.123 1.67.123 4.97 0 9-3.186 9-7.115C21 7.185 16.97 4 12 4";
-export const signupAPI = "http://10.58.1.191:8000/account/sign-up";
+export const signupAPI = "http://10.58.1.191:8001/account/sign-up";
 export const signinAPI = "http://10.58.1.191:8001/account/sign-in";
 export const signinkakaoAPI = "http://10.58.1.242:8001/account/kakao";
-export const mainsearchAPI = "http://10.58.1.242:8000/photo/search";
-export const userPageAPI = "http://10.58.1.242:8001/photo?user=username";
+export const mainsearchAPI = "http://10.58.1.191:8001/photo/search";
+export const userPageAPI = "http://10.58.1.191:8001/photo?user=username";
 
 export const colors = [
   "rgb(255,255,255)",

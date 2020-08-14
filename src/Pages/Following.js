@@ -11,7 +11,7 @@ const Following = () => {
   useEffect(() => {
     fetch(`${TopicCardsAPI}?category=Following`, {
       headers: {
-        Authorization: sessionStorage.getItem("access_token"),
+        Authorization: localStorage.getItem("access_token"),
       },
     })
       .then((res) => res.json())

@@ -19,12 +19,17 @@ const CardList = ({ topic }) => {
   const prevOffset = useRef(0);
   const LIMIT = 20;
 
+  const accessToken = localStorage.getItem("access_token");
   const fetchData = (api, setData, data) => {
-    fetch(`${TopicCardsAPI}${api}offset=${offset}&limit=${LIMIT}`, {
-      headers: {
-        Authorization: sessionStorage.getItem("access_token"),
-      },
-    })
+    setLoading(true);
+    fetch(
+      `${TopicCardsAPI}${api}offset=${offset}&limit=${LIMIT}`,
+      accessToken && {
+        headers: {
+          Authorization: accessToken,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((res) => {
         data ? setData([...data, ...res.data]) : setData([...res.data]);
@@ -36,7 +41,6 @@ const CardList = ({ topic }) => {
     fetchData(`/back?category=${topic[0].collection}&`, setColors, colors);
     fetchData(`?category=${topic[0].collection}&`, setCards);
   }, [topic]);
-
   const checkScrollHeight = () => {
     window.onscroll = function () {
       if (
